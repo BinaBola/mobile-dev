@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">BinaBola</string>
+    <string name="action_login">Login</string>
+    <string name="action_register">Register</string>
+    <string name="label_login">Login</string>
+    <string name="label_login_subtitle">Please Login Using Your Account To Continue</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="label_register_here">Or register here</string>
+    <string name="label_register">Register</string>
+    <string name="label_register_subtitle">Create Your BinaBola Account </string>
+    <string name="label_full_name">Full Name</string>
+    <string name="hint_full_name">Enter your full name</string>
+    <string name="hint_email">Enter your email</string>
+    <string name="hint_password">Enter your password</string>
+    <string name="label_loading">Loading..</string>
+    <string name="validation_full_name">Full name only allow characters</string>
+    <string name="validation_email">Your email format is incorrect</string>
+    <string name="validation_password">Min 8 characters</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
