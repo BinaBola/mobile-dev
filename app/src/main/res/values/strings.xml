@@ -3,6 +3,7 @@
     <string name="action_login">Login</string>
     <string name="action_register">Register</string>
     <string name="label_login">Login</string>
+    <string name="label_continuegoogle">Continue with Google</string>
     <string name="label_login_subtitle">Please Login Using Your Account To Continue</string>
     <string name="label_email">Email</string>
     <string name="label_password">Password</string>

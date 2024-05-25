@@ -133,6 +133,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edtPassword" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_continue"
+            android:layout_marginHorizontal="16dp"
+            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            app:rippleColor="#40FFFFFF"
+            app:cornerRadius="8dp"
+            android:textSize="14sp"
+            android:layout_marginTop="16dp"
+            android:paddingVertical="16dp"
+            android:text="@string/label_continuegoogle"
+            android:backgroundTint="@color/colorPrimaryGreen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edtPassword" />
     </LinearLayout>
 
     <include
