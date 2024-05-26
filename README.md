@@ -1,7 +1,7 @@
 # BinaBola - ENTS-H113
 ## Table of Contents
 
-1. [Team ENTS-H113 - MD](#team-c23-pc677---md)
+1. [Team ENTS-H113 - MD](#team-ENTS-H113---md)
 2. [What is BinaBola?](#BinaBola)
 3. [Technology](#technology)
 4. [Feature](#feature)
@@ -9,6 +9,12 @@
 5. [Demo](#video-demo)
 6. [Download](#download-our-apps)
 
+## Team ENTS-H1137 - MD
+
+| Bangkit ID | Name | Learning Path | University |LinkedIn |
+| ---      | ---       | ---       | ---       | ---       |
+| A117D4KY4240 | Muhammad Hafidz Fadillah  | Mobile Development| Institut Teknologi Nasional Bandung | [![text](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hfidzfadillah/) |
+| A117D4KY4434 | Rifqi Lukmansyah| Mobile Development | Institut Teknologi Nasional Bandung | [![text](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rifqilukmansyah/) |
 
 ## BinaBola
 
