@@ -1,13 +1,13 @@
 # BinaBola - ENTS-H113
 ## Table of Contents
 
-1. [Team ENTS-H113 - MD](#team-ENTS-H113---md)
+1. [Team ENTS-H113 - MD](#Team-ENTS-H113---md)
 2. [What is BinaBola?](#BinaBola)
-3. [Technology](#technology)
-4. [Feature](#feature)
-5. [Screenshots](#screenshots)
-5. [Demo](#video-demo)
-6. [Download](#download-our-apps)
+3. [Technology](#Technology)
+4. [Feature](#Feature)
+5. [Screenshots](#Screenshots)
+5. [Demo](#Video-demo)
+6. [Download](#Download-our-apps)
 
 ## Team ENTS-H1137 - MD
 
