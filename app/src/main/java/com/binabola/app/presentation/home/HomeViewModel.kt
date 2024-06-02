@@ -1,4 +1,6 @@
 package com.binabola.app.presentation.home
 
-class HomeViewModel {
+import androidx.lifecycle.ViewModel
+
+class HomeViewModel: ViewModel() {
 }
