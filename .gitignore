@@ -2,10 +2,16 @@
 .gradle
 /local.properties
 /.idea/caches
+/.idea/compiler.xml
+/.idea/gradle.xml
+/.idea/kotlinc.xml
 /.idea/libraries
+/.idea/migrations.xml
+/.idea/misc.xml
 /.idea/modules.xml
 /.idea/workspace.xml
 /.idea/navEditor.xml
+/.idea/vcs.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
 /build

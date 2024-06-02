@@ -5,56 +5,111 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.binabola.app.R
+import com.binabola.app.databinding.FragmentHomeBinding
+import com.binabola.app.presentation.adapter.CalendarAdapter
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var calAdapter: CalendarAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        initView()
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun initView() {
+        val listDate = generateDates()
+
+        calAdapter = CalendarAdapter { calendar ->
+            println("SELECTED DATE: ${calendar.get(Calendar.DATE)}")
+        }
+
+        calAdapter.submitList(listDate)
+
+        binding.rvCalendar.apply {
+            layoutManager = GridLayoutManager(requireContext(), 7, GridLayoutManager.VERTICAL, false)
+            setHasFixedSize(true)
+            this.adapter = calAdapter
+        }
+
+        binding.btnNextWeek.setOnClickListener {
+            onNextButtonClick()
+        }
+
+        binding.btnPrevWeek.setOnClickListener {
+            onPrevButtonClick()
+        }
+
+        updateCurrentMonth()
     }
+
+    private fun generateDates(startDate: Calendar = Calendar.getInstance()): List<Calendar> {
+        val dates = mutableListOf<Calendar>()
+
+        // Set the calendar to the first day of the current week
+//        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
+
+        // Add the next 7 days
+        repeat(7) {
+            val date = startDate.clone() as Calendar
+            dates.add(date)
+            startDate.add(Calendar.DAY_OF_MONTH, 1)
+        }
+
+        return dates
+    }
+
+    private fun onPrevButtonClick() {
+        val firstDate = calAdapter.currentList.firstOrNull()
+        if (firstDate != null) {
+            val newStartDate = firstDate.clone() as Calendar
+            newStartDate.add(Calendar.DAY_OF_MONTH, -7)
+            calAdapter.submitList(generateDates(newStartDate))
+            updateCurrentMonth(newStartDate)
+        } else {
+            showToast("No dates available")
+        }
+    }
+
+    private fun onNextButtonClick() {
+        val lastDate = calAdapter.currentList.lastOrNull()
+        if (lastDate != null) {
+            val newStartDate = lastDate.clone() as Calendar
+            newStartDate.add(Calendar.DAY_OF_MONTH, 1)
+            calAdapter.submitList(generateDates(newStartDate))
+            updateCurrentMonth(newStartDate)
+        } else {
+            showToast("No dates available")
+        }
+    }
+
+    private fun updateCurrentMonth(date: Calendar = Calendar.getInstance()) {
+        val dateFormat = SimpleDateFormat("MMM yyyy", Locale.getDefault())
+        val monthString = dateFormat.format(date.time)
+        binding.tvMonth.text = monthString
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }
