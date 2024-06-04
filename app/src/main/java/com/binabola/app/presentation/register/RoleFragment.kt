@@ -42,20 +42,6 @@ class RoleFragment : Fragment() {
                 }
             }
         }
-
-        viewModel.getRole().observe(viewLifecycleOwner) {
-            when(it) {
-                "player" -> {
-                    binding.radioPlayer.isChecked = true
-                }
-                "coach" -> {
-                    binding.radioCoach.isChecked = true
-                }
-                "club" -> {
-                    binding.radioClub.isChecked = true
-                }
-            }
-        }
     }
 
     override fun onDestroyView() {

@@ -14,11 +14,11 @@ class RegisterViewModel : ViewModel() {
         "role" to "club | coach | player",
     ) */
     fun storeRole(role: String) {
-        selectedRole.postValue(role)
+        selectedRole.value = role
     }
 
-    fun getRole(): LiveData<String>{
-        return selectedRole
+    fun getRole(): String{
+        return selectedRole.value ?: "-"
     }
 
     /** Example data:

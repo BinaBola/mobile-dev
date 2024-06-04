@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import com.binabola.app.R
 import com.binabola.app.databinding.ActivityRegisterBinding
+import com.binabola.app.presentation.AppUtil
 import com.binabola.app.presentation.ViewModelFactory
 import com.binabola.app.presentation.adapter.SectionPagerAdapter
 
@@ -40,6 +41,7 @@ class RegisterActivity : AppCompatActivity() {
 
         val adapter = SectionPagerAdapter(this)
         binding.viewPager.adapter = adapter
+        binding.viewPager.isUserInputEnabled = false
 
         binding.tvTitle.setText(PAGE_TITLES[binding.viewPager.currentItem])
 
@@ -58,11 +60,20 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-
-
         binding.btnNext.setOnClickListener {
             val currentPage = binding.viewPager.currentItem
             println("PAGE:$currentPage")
+
+
+            if(currentPage == 0 && viewModel.getRole().isEmpty()) {
+                AppUtil().showToast(this, "Silakan pilih role")
+                return@setOnClickListener
+            }
+//
+//            if(currentPage == 1 && viewModel.getUserData().value == null) {
+//                AppUtil().showToast(this, "Silakan lengkapi data")
+//                return@setOnClickListener
+//            }
 
             if(currentPage < adapter.itemCount - 1) {
                 binding.btnNext.visibility = View.VISIBLE
