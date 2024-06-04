@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin_3"
+    tools:context=".presentation.register.RoleFragment">
+
+    <RadioGroup
+        android:id="@+id/roleGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        
+        <RadioButton
+            android:id="@+id/radioClub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Klub"
+            android:padding="@dimen/margin_2"
+            android:background="@drawable/border_calories"
+            android:textSize="@dimen/font_size_large"
+            android:drawableTop="@drawable/vector_player"
+            android:gravity="center"/>
+
+        <RadioButton
+            android:id="@+id/radioCoach"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pelatih"
+            android:padding="@dimen/margin_2"
+            android:layout_marginTop="@dimen/margin_3"
+            android:background="@drawable/border_calories"
+            android:textSize="@dimen/font_size_large"
+            android:drawableTop="@drawable/vector_player"
+            android:gravity="center"/>
+
+        <RadioButton
+            android:id="@+id/radioPlayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pemain"
+            android:padding="@dimen/margin_2"
+            android:layout_marginTop="@dimen/margin_3"
+            android:background="@drawable/border_calories"
+            android:textSize="@dimen/font_size_large"
+            android:drawableTop="@drawable/vector_player"
+            android:gravity="center"/>
+    </RadioGroup>
+
+</LinearLayout>

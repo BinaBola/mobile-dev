@@ -1,8 +1,9 @@
-package com.binabola.app
+package com.binabola.app.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.binabola.app.R
 import com.binabola.app.databinding.ActivityMainBinding
 import com.binabola.app.presentation.food.FoodFragment
 import com.binabola.app.presentation.home.HomeFragment
