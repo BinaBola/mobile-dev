@@ -20,4 +20,7 @@
     <string name="validation_password">Min 8 characters</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="regis_text_1">Pilih Role</string>
+    <string name="regis_text_2">Isi Data Diri</string>
+    <string name="regis_text_3">Isi Data Akun</string>
 </resources>
