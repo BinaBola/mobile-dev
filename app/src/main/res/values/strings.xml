@@ -18,6 +18,7 @@
     <string name="validation_full_name">Full name only allow characters</string>
     <string name="validation_email">Your email format is incorrect</string>
     <string name="validation_password">Min 8 characters</string>
+    <string name="loremipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="regis_text_1">Pilih Role</string>
