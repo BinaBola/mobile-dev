@@ -24,4 +24,6 @@
     <string name="regis_text_1">Pilih Role</string>
     <string name="regis_text_2">Isi Data Diri</string>
     <string name="regis_text_3">Isi Data Akun</string>
+    <string name="action_language_setting">Language</string>
+    <string name="action_logout" >Logout</string>
 </resources>
