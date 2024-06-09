@@ -1,8 +1,10 @@
 package com.binabola.app.presentation.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -11,6 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.binabola.app.R
 import com.binabola.app.databinding.FragmentHomeBinding
 import com.binabola.app.presentation.adapter.CalendarAdapter
+import com.binabola.app.presentation.adapter.ExerciseAdapter
+import com.binabola.app.presentation.exercise.DetailExerciseActivity
+import com.binabola.app.presentation.exercise.Exercise
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -28,6 +33,7 @@ class HomeFragment : Fragment() {
         val view = binding.root
 
         initView()
+        initExercise()
         return view
     }
 
@@ -41,7 +47,7 @@ class HomeFragment : Fragment() {
         calAdapter.submitList(listDate)
 
         binding.rvCalendar.apply {
-            layoutManager = GridLayoutManager(requireContext(), 7, GridLayoutManager.VERTICAL, false)
+            layoutManager = GridLayoutManager(requireActivity(), 7, GridLayoutManager.VERTICAL, false)
             setHasFixedSize(true)
             this.adapter = calAdapter
         }
@@ -55,6 +61,27 @@ class HomeFragment : Fragment() {
         }
 
         updateCurrentMonth()
+    }
+
+    private fun initExercise() {
+        val tempList = mutableListOf<Exercise>()
+
+        for (i in 0..5) {
+            val data = Exercise("Latihan $i", "Lorem ipsum dolor sit amet")
+            tempList.add(data)
+        }
+
+        val eAdapter = ExerciseAdapter{
+            startActivity(Intent(requireActivity(), DetailExerciseActivity::class.java))
+        }
+        eAdapter.submitList(tempList)
+
+        binding.rvExercise.apply {
+            layoutManager = LinearLayoutManager(requireActivity())
+            setHasFixedSize(true)
+            this.adapter = eAdapter
+
+        }
     }
 
     private fun generateDates(startDate: Calendar = Calendar.getInstance()): List<Calendar> {
@@ -104,7 +131,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

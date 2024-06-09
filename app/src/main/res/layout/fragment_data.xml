@@ -1,15 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/margin_3"
+    android:orientation="vertical"
     tools:context=".presentation.register.DataFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Isi Data User"
-        android:gravity="center"/>
+        android:layout_height="wrap_content"
+        android:text="Tanggal Lahir"/>
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/choose_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/border_calories"
+        android:padding="@dimen/margin_3">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_calendar_month_24"
+            android:tint="@color/grey_400"
+            android:layout_marginEnd="@dimen/margin_3"/>
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pilih tanggal"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jenis Kelamin"
+        android:layout_marginTop="@dimen/margin_3"/>
+    <RadioGroup
+        android:id="@+id/radioGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rb_male"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/border_calories"
+            android:text="Laki laki"
+            android:layout_marginEnd="@dimen/margin_4"/>
+        <RadioButton
+            android:id="@+id/rb_female"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/border_calories"
+            android:text="Perempuan"/>
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_3">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginEnd="@dimen/margin_3">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tinggi"/>
+            <EditText
+                android:id="@+id/et_tinggi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:hint="Tinggi (cm)"
+                android:textSize="14sp"
+                android:inputType="numberDecimal"
+                android:maxLength="3"
+                android:background="@drawable/bg_bordered_edit_text"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Berat"/>
+            <EditText
+                android:id="@+id/et_berat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:hint="Berat (kg)"
+                android:textSize="14sp"
+                android:inputType="numberDecimal"
+                android:maxLength="3"
+                android:background="@drawable/bg_bordered_edit_text"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -83,7 +83,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_register"
-        android:layout_marginHorizontal="16dp"
+        android:layout_margin="16dp"
         android:layout_height="60dp"
         android:layout_width="match_parent"
         android:includeFontPadding="false"
@@ -97,6 +97,6 @@
         android:backgroundTint="@color/colorPrimaryGreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edtPassword" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

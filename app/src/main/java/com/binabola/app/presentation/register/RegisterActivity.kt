@@ -1,5 +1,6 @@
 package com.binabola.app.presentation.register
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -15,24 +16,22 @@ import com.binabola.app.presentation.adapter.SectionPagerAdapter
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
-    private val viewModel by viewModels<RegisterViewModel> {
-        ViewModelFactory.getInstance(this)
-    }
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            val currentPage = binding.viewPager.currentItem
 
             if(currentPage > 0) {
-                binding.viewPager.setCurrentItem(currentPage - 1)
-                binding.progressBar.progress = currentPage - 1
+                currentPage -= 1
+                binding.progressBar.progress = currentPage+1
+                binding.viewPager.setCurrentItem(currentPage)
 
-                binding.tvTitle.setText(PAGE_TITLES[currentPage-1])
+                binding.tvTitle.setText(PAGE_TITLES[currentPage])
                 binding.btnNext.visibility = View.VISIBLE
             } else {
                 finish()
             }
         }
     }
+    private var currentPage = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,13 +46,12 @@ class RegisterActivity : AppCompatActivity() {
 
         onBackPressedDispatcher.addCallback(this,onBackPressedCallback)
         binding.btnBack.setOnClickListener {
-            val currentPage = binding.viewPager.currentItem
-
             if(currentPage > 0) {
-                binding.viewPager.setCurrentItem(currentPage - 1)
-                binding.progressBar.progress = currentPage - 1
+                currentPage -= 1
+                binding.progressBar.progress = currentPage+1
+                binding.viewPager.setCurrentItem(currentPage)
 
-                binding.tvTitle.setText(PAGE_TITLES[currentPage-1])
+                binding.tvTitle.setText(PAGE_TITLES[currentPage])
                 binding.btnNext.visibility = View.VISIBLE
             } else {
                 finish()
@@ -61,32 +59,48 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.btnNext.setOnClickListener {
-            val currentPage = binding.viewPager.currentItem
-            println("PAGE:$currentPage")
-
-
-            if(currentPage == 0 && viewModel.getRole().isEmpty()) {
-                AppUtil().showToast(this, "Silakan pilih role")
+            if(!isComplete()) {
                 return@setOnClickListener
             }
-//
-//            if(currentPage == 1 && viewModel.getUserData().value == null) {
-//                AppUtil().showToast(this, "Silakan lengkapi data")
-//                return@setOnClickListener
-//            }
 
-            if(currentPage < adapter.itemCount - 1) {
+            if(currentPage + 1 < adapter.itemCount) {
+                currentPage += 1
+                binding.progressBar.progress = currentPage+1
+
                 binding.btnNext.visibility = View.VISIBLE
-                binding.viewPager.setCurrentItem(currentPage + 1)
-                binding.progressBar.progress = currentPage + 1
+                binding.viewPager.setCurrentItem(currentPage)
 
-                binding.tvTitle.setText(PAGE_TITLES[currentPage+1])
+                binding.tvTitle.setText(PAGE_TITLES[currentPage])
             }
 
-            if(currentPage + 1 == adapter.itemCount-1) {
+            if(currentPage + 1 == adapter.itemCount) {
                 binding.btnNext.visibility = View.GONE
             }
         }
+    }
+
+    private fun isComplete(): Boolean {
+        val prefs = getSharedPreferences("REGISTER", Context.MODE_PRIVATE)
+        val role = prefs.getString("role",null)
+        val data = prefs.getString("data",null)
+        val account = prefs.getString("account",null)
+
+        if(currentPage == 0 && role == null) {
+            AppUtil().showToast(this, "Silakan pilih role")
+            return false
+        }
+
+        if (currentPage == 1 && data == null) {
+            AppUtil().showToast(this, "Silakan lengkapi form")
+            return false
+        }
+
+        if (currentPage == 2 && account == null) {
+            AppUtil().showToast(this, "Silakan lengkapi data akun")
+            return false
+        }
+
+        return true
     }
 
     companion object {

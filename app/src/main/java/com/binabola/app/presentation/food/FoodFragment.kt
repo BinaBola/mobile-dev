@@ -42,7 +42,7 @@ class FoodFragment : Fragment() {
         calAdapter.submitList(listDate)
 
         binding.rvCalendar.apply {
-            layoutManager = GridLayoutManager(requireContext(), 7, GridLayoutManager.VERTICAL, false)
+            layoutManager = GridLayoutManager(requireActivity(), 7, GridLayoutManager.VERTICAL, false)
             setHasFixedSize(true)
             this.adapter = calAdapter
         }
@@ -105,7 +105,7 @@ class FoodFragment : Fragment() {
     }
 
     private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
