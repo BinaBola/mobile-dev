@@ -99,4 +99,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/loading_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:indeterminate="true"
+        app:layout_constraintStart_toStartOf="@id/btn_register"
+        app:layout_constraintEnd_toEndOf="@id/btn_register"
+        app:layout_constraintTop_toTopOf="@id/btn_register"
+        app:layout_constraintBottom_toBottomOf="@id/btn_register"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

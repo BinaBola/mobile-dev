@@ -10,21 +10,25 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.binabola.app.data.Result
-import com.binabola.app.data.pref.UserModel
 import com.binabola.app.data.pref.UserPreference
+import com.binabola.app.data.remote.response.DefaultResponse
+import com.binabola.app.data.remote.response.DetailUserResponse
+import com.binabola.app.data.remote.response.UserModel
 
 class UserRepository private constructor(
     private val userPreference: UserPreference,
     private val apiService: ApiService,
 ) {
     private val regisresult = MediatorLiveData<Result<RegisterResponse>>()
-//    private val loginresult = MediatorLiveData<Result<LoginResponse>>()
+    private val loginresult = MediatorLiveData<Result<UserModel>>()
+    private val detailProfil = MediatorLiveData<Result<DetailUserResponse>>()
 
-    fun register(mapdata: Map<String,String>): LiveData<Result<RegisterResponse>> {
+    fun register(mapdata: Map<String,String?>): LiveData<Result<RegisterResponse>> {
         regisresult.value = Result.Loading
         try{
+            var username = mapdata["email"].toString().split("@").get(0)
             val client = apiService.register(
-                "",
+                username,
                 mapdata["email"].toString(),
                 mapdata["password"].toString(),
                 mapdata["role"].toString(),
@@ -44,7 +48,7 @@ class UserRepository private constructor(
                         regisresult.value = Result.Success(body!!)
                     } else {
                         val jsonInString = response.errorBody()?.string()
-                        val errorBody = Gson().fromJson(jsonInString, RegisterResponse::class.java)
+                        val errorBody = Gson().fromJson(jsonInString, DefaultResponse::class.java)
                         val errorMessage = errorBody.message
 
                         regisresult.value = Result.Error(errorMessage.toString())
@@ -52,6 +56,7 @@ class UserRepository private constructor(
                 }
 
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                    t.printStackTrace()
                     regisresult.value = Result.Error(t.message.toString())
                 }
 
@@ -64,36 +69,73 @@ class UserRepository private constructor(
         return regisresult
     }
 
-//    fun login(email: String, password: String): LiveData<Result<LoginResponse>> {
-//        loginresult.value = Result.Loading
-//        try {
-//            val client = apiService.login( email, password)
-//            client.enqueue(object : Callback<LoginResponse> {
-//                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-//                    if(response.isSuccessful) {
-//                        val body = response.body()
-//                        loginresult.value = Result.Success(body!!)
-//                    } else {
+    fun login(email: String, password: String): LiveData<Result<UserModel>> {
+        loginresult.value = Result.Loading
+        try {
+            val client = apiService.login(email, password)
+            client.enqueue(object : Callback<UserModel> {
+                override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
+                    if(response.isSuccessful) {
+                        val body = response.body()
+                        loginresult.value = Result.Success(body!!)
+                    } else {
+                        val jsonInString = response.errorBody()?.string()
+                        val errorBody = Gson().fromJson(jsonInString, DefaultResponse::class.java)
+                        val errorMessage = errorBody.message
+
+                        loginresult.value = Result.Error(errorMessage.toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<UserModel>, t: Throwable) {
+                    t.printStackTrace()
+                    loginresult.value = Result.Error(t.message.toString())
+                }
+
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+            loginresult.value = Result.Error(e.toString())
+        }
+
+        return loginresult
+    }
+
+    fun getProfile(uid: String): LiveData<Result<DetailUserResponse>> {
+        detailProfil.value = Result.Loading
+
+        try{
+            val client = apiService.getDetail(uid)
+            client.enqueue(object : Callback<DetailUserResponse> {
+                override fun onResponse(
+                    call: Call<DetailUserResponse>,
+                    response: Response<DetailUserResponse>
+                ) {
+                    if(response.isSuccessful) {
+                        val body = response.body()
+                        detailProfil.value = Result.Success(body!!)
+                    } else {
 //                        val jsonInString = response.errorBody()?.string()
-//                        val errorBody = Gson().fromJson(jsonInString, RegisterResponse::class.java)
+//                        val errorBody = Gson().fromJson(jsonInString, UserModel::class.java)
 //                        val errorMessage = errorBody.message
-//
-//                        loginresult.value = Result.Error(errorMessage.toString())
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-//                    loginresult.value = Result.Error(t.message.toString())
-//                }
-//
-//            })
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//            loginresult.value = Result.Error(e.toString())
-//        }
-//
-//        return loginresult
-//    }
+
+                        loginresult.value = Result.Error(response.message())
+                    }
+                }
+
+                override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
+                    t.printStackTrace()
+                    detailProfil.value = Result.Error(t.message.toString())
+                }
+
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+            detailProfil.value = Result.Error(e.toString())
+        }
+
+        return detailProfil
+    }
 
     suspend fun saveSession(user: UserModel) {
         userPreference.saveSession(user)

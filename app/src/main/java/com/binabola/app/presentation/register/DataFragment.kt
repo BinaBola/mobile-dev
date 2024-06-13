@@ -56,7 +56,13 @@ class DataFragment : Fragment() {
                     currentMonth = monthOfYear+1
                     currentYear = year
 
-                    dobString = "$currentYear-$currentMonth-$currentDay"
+                    var strMonth = if(currentMonth.toString().length > 1) {
+                        currentMonth.toString()
+                    } else {
+                        "0$currentMonth"
+                    }
+
+                    dobString = "$currentYear-$strMonth-$currentDay"
                     binding.tvDate.text = dobString
 
                     dataMap["dob"] = dobString

@@ -5,15 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.binabola.app.data.remote.response.GetExerciseItem
 import com.binabola.app.databinding.ItemMissionBinding
-import com.binabola.app.presentation.exercise.Exercise
-import java.util.Calendar
 
-class ExerciseAdapter(private val listener: (Exercise) -> Unit) : ListAdapter<Exercise, ExerciseAdapter.ExerciseViewHolder>(ExerciseDiffCallback()) {
+class ExerciseAdapter(private val listener: (GetExerciseItem) -> Unit) : ListAdapter<GetExerciseItem, ExerciseAdapter.ExerciseViewHolder>(ExerciseDiffCallback()) {
     inner class ExerciseViewHolder(private val binding: ItemMissionBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(exercise: Exercise) {
+        fun bind(exercise: GetExerciseItem) {
             binding.tvTitle.text = exercise.name
-            binding.tvDesc.text = exercise.desc
+            binding.tvDesc.text = exercise.category
             binding.root.setOnClickListener{
                 listener(exercise)
             }
@@ -31,12 +30,12 @@ class ExerciseAdapter(private val listener: (Exercise) -> Unit) : ListAdapter<Ex
     }
 }
 
-class ExerciseDiffCallback : DiffUtil.ItemCallback<Exercise>() {
-    override fun areItemsTheSame(oldItem: Exercise, newItem: Exercise): Boolean {
-        return oldItem.name == newItem.name
+class ExerciseDiffCallback : DiffUtil.ItemCallback<GetExerciseItem>() {
+    override fun areItemsTheSame(oldItem: GetExerciseItem, newItem: GetExerciseItem): Boolean {
+        return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: Exercise, newItem: Exercise): Boolean {
+    override fun areContentsTheSame(oldItem: GetExerciseItem, newItem: GetExerciseItem): Boolean {
         return oldItem == newItem
     }
 }

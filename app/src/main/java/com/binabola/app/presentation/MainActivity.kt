@@ -1,7 +1,9 @@
 package com.binabola.app.presentation
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.binabola.app.R
 import com.binabola.app.databinding.ActivityMainBinding
@@ -11,6 +13,9 @@ import com.binabola.app.presentation.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val viewModel by viewModels<MainViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
 
     private val homeFragment = HomeFragment()
     private val foodFragment = FoodFragment()
@@ -20,6 +25,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel.getSession().observe(this) {
+            if(!it.isLogin) {
+                val intent = Intent(this, WelcomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finish()
+            } else {
+                viewModel.getProfile(it.userId.toString())
+//                viewModel.getExercises()
+            }
+        }
 
         setCurrentFragment(homeFragment)
 
