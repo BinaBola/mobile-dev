@@ -1,60 +1,138 @@
 package com.binabola.app.presentation.register
 
+import android.app.DatePickerDialog
+import android.content.Context
+import android.content.SharedPreferences
+import android.icu.util.Calendar
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.binabola.app.R
+import com.binabola.app.databinding.FragmentDataBinding
+import com.binabola.app.databinding.FragmentHomeBinding
+import com.google.gson.Gson
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DataFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DataFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentDataBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var calendar: Calendar
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var currentDay: Int? = null
+    private var currentMonth: Int? = null
+    private var currentYear: Int? = null
+
+    private var dobString = ""
+    private var dataMap = mutableMapOf<String, String>()
+    private var prefs: SharedPreferences? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_data, container, false)
+    ): View {
+        _binding = FragmentDataBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        prefs= requireActivity().getSharedPreferences("REGISTER",Context.MODE_PRIVATE)
+
+        calendar = Calendar.getInstance()
+        currentDay = calendar.get(Calendar.DAY_OF_MONTH)
+        currentMonth = calendar.get(Calendar.MONTH)
+        currentYear = calendar.get(Calendar.YEAR)
+
+        initView()
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DataFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DataFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun initView() {
+        binding.chooseDate.setOnClickListener {
+            val dateDialog = DatePickerDialog(
+                requireActivity(),
+                { view, year, monthOfYear, dayOfMonth ->
+                    currentDay = dayOfMonth
+                    currentMonth = monthOfYear+1
+                    currentYear = year
+
+                    var strMonth = if(currentMonth.toString().length > 1) {
+                        currentMonth.toString()
+                    } else {
+                        "0$currentMonth"
+                    }
+
+                    dobString = "$currentYear-$strMonth-$currentDay"
+                    binding.tvDate.text = dobString
+
+                    dataMap["dob"] = dobString
+                    mapToJsonString()
+                },
+                currentYear!!,
+                currentMonth!!,
+                currentDay!!
+            )
+            dateDialog.datePicker.maxDate = calendar.timeInMillis
+
+            dateDialog.show()
+        }
+
+        binding.radioGender.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId) {
+                R.id.rb_male -> {
+                    dataMap["gender"] = "L"
+                }
+                R.id.rb_female -> {
+                    dataMap["gender"] = "P"
                 }
             }
+
+            mapToJsonString()
+        }
+
+        binding.etBerat.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val berat = s.toString()
+
+                dataMap["berat"] = berat
+                mapToJsonString()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+        })
+
+        binding.etTinggi.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val tinggi = s.toString()
+
+                dataMap["tinggi"] = tinggi
+                mapToJsonString()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+        })
     }
+
+    private fun mapToJsonString() {
+        val gson = Gson()
+        val convert = gson.toJson(dataMap)
+
+        prefs!!.edit().putString("data",convert).apply()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

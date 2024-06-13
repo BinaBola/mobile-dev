@@ -1,53 +1,8 @@
 package com.binabola.app.presentation.register
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.binabola.app.data.repository.UserRepository
 
-class RegisterViewModel : ViewModel() {
-    private val selectedRole = MutableLiveData<String>()
-    private val userData = MutableLiveData<Map<String, String>>()
-    private val credential = MutableLiveData<Map<String, String>>()
-
-    /** Example data:
-     * mapOf(
-        "role" to "club | coach | player",
-    ) */
-    fun storeRole(role: String) {
-        selectedRole.value = role
-    }
-
-    fun getRole(): String{
-        return selectedRole.value ?: "-"
-    }
-
-    /** Example data:
-     * mapOf(
-        "nama" to "Name",
-        "gender" to "L | P",
-        "dob" to "2003/07/03",
-        "tinggi" to "170",
-        "berat" to "68"
-    ) */
-    fun storeData(data: Map<String, String>) {
-        userData.postValue(data)
-    }
-
-    fun getUserData(): LiveData<Map<String, String>> {
-        return userData
-    }
-
-    /** Example data:
-     * mapOf(
-        "email" to "email@mail.com",
-        "password" to "password"
-    ) */
-    fun storeCredential(data: Map<String, String>) {
-        credential.postValue(data)
-    }
-
-    fun getCredential(): LiveData<Map<String, String>> {
-        return credential
-    }
-
+class RegisterViewModel(private val repository: UserRepository) : ViewModel() {
+    fun register(mapData: Map<String, String?>) = repository.register(mapData)
 }

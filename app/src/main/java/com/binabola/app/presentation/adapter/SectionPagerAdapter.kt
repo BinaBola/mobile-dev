@@ -13,7 +13,6 @@ class SectionPagerAdapter(activity: AppCompatActivity): FragmentStateAdapter(act
     }
 
     override fun createFragment(position: Int): Fragment {
-        println(position)
 
         return when(position) {
             0 -> RoleFragment()

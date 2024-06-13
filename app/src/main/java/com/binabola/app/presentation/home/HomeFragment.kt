@@ -1,22 +1,35 @@
 package com.binabola.app.presentation.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.binabola.app.R
+import com.binabola.app.data.Result
+import com.binabola.app.data.remote.response.GetExerciseItem
 import com.binabola.app.databinding.FragmentHomeBinding
+import com.binabola.app.presentation.AppUtil
+import com.binabola.app.presentation.MainViewModel
+import com.binabola.app.presentation.ViewModelFactory
 import com.binabola.app.presentation.adapter.CalendarAdapter
+import com.binabola.app.presentation.adapter.ExerciseAdapter
+import com.binabola.app.presentation.exercise.DetailExerciseActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
+    private val viewModel by viewModels<MainViewModel> {
+        ViewModelFactory.getInstance(requireActivity())
+    }
+
     private val binding get() = _binding!!
     private lateinit var calAdapter: CalendarAdapter
 
@@ -28,6 +41,7 @@ class HomeFragment : Fragment() {
         val view = binding.root
 
         initView()
+        initExercise()
         return view
     }
 
@@ -41,7 +55,7 @@ class HomeFragment : Fragment() {
         calAdapter.submitList(listDate)
 
         binding.rvCalendar.apply {
-            layoutManager = GridLayoutManager(requireContext(), 7, GridLayoutManager.VERTICAL, false)
+            layoutManager = GridLayoutManager(requireActivity(), 7, GridLayoutManager.VERTICAL, false)
             setHasFixedSize(true)
             this.adapter = calAdapter
         }
@@ -55,6 +69,43 @@ class HomeFragment : Fragment() {
         }
 
         updateCurrentMonth()
+    }
+
+    private fun initExercise() {
+        val exAdapter = ExerciseAdapter{
+            val id = it.id
+            println("ID: $id")
+            viewModel.getDetailExercise(id.toString())
+            val intent = Intent(requireContext(), DetailExerciseActivity::class.java)
+            intent.putExtra(DetailExerciseActivity.EXTRA_ID, id.toString())
+            startActivity(intent)
+        }
+
+        viewModel.getExercises().observe(viewLifecycleOwner) {
+            when (it) {
+                is Result.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is Result.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    AppUtil().showToast(requireActivity(), it.error)
+                }
+                is Result.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    val data = it.data
+                    println("DATA: $data")
+                    exAdapter.submitList(data)
+                    println("ITEM COUNT: ${exAdapter.itemCount}")
+
+                    binding.rvExercise.apply {
+                        layoutManager = LinearLayoutManager(requireActivity())
+                        setHasFixedSize(true)
+                        this.adapter = exAdapter
+
+                    }
+                }
+            }
+        }
     }
 
     private fun generateDates(startDate: Calendar = Calendar.getInstance()): List<Calendar> {
@@ -81,7 +132,7 @@ class HomeFragment : Fragment() {
             calAdapter.submitList(generateDates(newStartDate))
             updateCurrentMonth(newStartDate)
         } else {
-            showToast("No dates available")
+            AppUtil().showToast(requireActivity(),"No dates available")
         }
     }
 
@@ -93,7 +144,7 @@ class HomeFragment : Fragment() {
             calAdapter.submitList(generateDates(newStartDate))
             updateCurrentMonth(newStartDate)
         } else {
-            showToast("No dates available")
+            AppUtil().showToast(requireActivity(),"No dates available")
         }
     }
 
@@ -101,10 +152,6 @@ class HomeFragment : Fragment() {
         val dateFormat = SimpleDateFormat("MMM yyyy", Locale.getDefault())
         val monthString = dateFormat.format(date.time)
         binding.tvMonth.text = monthString
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

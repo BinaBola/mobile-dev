@@ -1,60 +1,109 @@
 package com.binabola.app.presentation.register
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.binabola.app.R
+import androidx.fragment.app.viewModels
+import com.binabola.app.data.Result
+import com.binabola.app.databinding.FragmentAccountBinding
+import com.binabola.app.presentation.AppUtil
+import com.binabola.app.presentation.ViewModelFactory
+import com.google.gson.Gson
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AccountFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AccountFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private var _binding: FragmentAccountBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel by viewModels<RegisterViewModel> {
+        ViewModelFactory.getInstance(requireActivity())
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false)
+    ): View {
+        _binding = FragmentAccountBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        initView()
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AccountFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AccountFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun initView() {
+        binding.btnRegister.setOnClickListener {
+            regisAttempt()
+        }
+    }
+
+    private fun regisAttempt() {
+        val prefs = requireActivity().getSharedPreferences("REGISTER", Context.MODE_PRIVATE)
+        val role = prefs.getString("role",null)
+        val data = prefs.getString("data",null)
+        val decodedData = Gson().fromJson<Map<String, String?>>(data, Map::class.java)
+
+        val nama = binding.edtName.text.toString()
+        val email = binding.edtEmail.text.toString()
+        val password = binding.edtPassword.text.toString()
+
+        if (nama.isEmpty()) {
+            binding.edtName.error = "Nama tidak boleh kosong"
+            return
+        }
+        if (email.isEmpty()) {
+            binding.edtName.error = "Email tidak boleh kosong"
+            return
+        }
+        if (password.isEmpty()) {
+            binding.edtName.error = "Password tidak boleh kosong"
+            return
+        }
+
+
+        val mappedData = mapOf(
+            "nama" to nama,
+            "email" to email,
+            "password" to password,
+            "role" to role,
+            "tb" to decodedData["tinggi"],
+            "bb" to decodedData["berat"],
+            "dob" to decodedData["dob"],
+            "gender" to decodedData["gender"],
+        )
+
+        viewModel.register(mappedData).observe(viewLifecycleOwner) {
+            if(it != null) {
+                when (it) {
+                    is Result.Loading -> {
+                        loadingState(true)
+                    }
+                    is Result.Error -> {
+                        loadingState(false)
+                        AppUtil().showToast(requireContext(), it.error)
+                    }
+                    is Result.Success -> {
+                        loadingState(false)
+                        AppUtil().showToast(requireContext(), it.data.message ?: "Registrasi berhasil. Silakan Login")
+                        requireActivity().finish()
+                    }
                 }
             }
+        }
+    }
+
+    private fun loadingState(show: Boolean) {
+        if(show) {
+            binding.btnRegister.visibility = View.GONE
+            binding.loadingBar.visibility = View.VISIBLE
+        } else {
+            binding.btnRegister.visibility = View.VISIBLE
+            binding.loadingBar.visibility = View.GONE
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
