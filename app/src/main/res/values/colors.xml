@@ -15,4 +15,5 @@
     <color name="grey_900">#212121</color>
     <color name="colorPrimaryGreen">#37A479</color>
     <color name="colorPrimaryGreenDarker">#146746</color>
+    <color name="red_button">#DF334D</color>
 </resources>
