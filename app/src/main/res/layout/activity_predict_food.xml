@@ -7,18 +7,36 @@
     android:layout_height="match_parent"
     tools:context=".presentation.predictfood.PredictFoodActivity">
 
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_3"
-        android:background="@android:color/transparent"
-        android:contentDescription="TODO"
-        android:src="@drawable/baseline_arrow_back_ios_24"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/colorPrimaryGreen"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        android:navigationIcon="@drawable/baseline_arrow_back_ios_24"/>
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/viewFinder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/captureImage"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/grey_800"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        app:cornerRadius="15dp"
+        app:icon="@drawable/ic_add_photo"
+        app:iconSize="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        tools:ignore="SpeakableTextPresentCheck" />
+
+
 
 
 
