@@ -1,17 +1,20 @@
 package com.binabola.app.presentation.food
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.binabola.app.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.binabola.app.databinding.FragmentFoodBinding
-import com.binabola.app.databinding.FragmentHomeBinding
+import com.binabola.app.presentation.MainViewModel
+import com.binabola.app.presentation.ViewModelFactory
 import com.binabola.app.presentation.adapter.CalendarAdapter
+import com.binabola.app.presentation.adapter.FoodAdapter
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -20,6 +23,41 @@ class FoodFragment : Fragment() {
     private var _binding: FragmentFoodBinding? = null
     private val binding get() = _binding!!
     private lateinit var calAdapter: CalendarAdapter
+    private val viewModel by activityViewModels<MainViewModel> {
+        ViewModelFactory.getInstance(requireActivity())
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.listFood.observe(viewLifecycleOwner) {
+            println("GET LIST FOOD: $it")
+            if(it.isNotEmpty()) {
+                binding.rvfood.visibility = View.VISIBLE
+                binding.nodata.visibility = View.GONE
+                val fAdapter  = FoodAdapter()
+                val data = it
+
+                println("DATA: $data")
+                fAdapter.submitList(data)
+                println("ITEM COUNT: ${fAdapter.itemCount}")
+
+                binding.rvfood.apply {
+                    layoutManager = LinearLayoutManager(requireContext())
+                    setHasFixedSize(true)
+                    adapter = fAdapter
+                }
+            } else {
+                binding.rvfood.visibility = View.GONE
+                binding.nodata.visibility = View.VISIBLE
+            }
+        }
+
+        viewModel.getTotalCalories().observe(viewLifecycleOwner) {
+            println("TOTAL CALORIES: $it")
+            binding.manyfood.text = "Today's Calorie Intake: $it kcal"
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -13,6 +13,7 @@ import com.binabola.app.data.Result
 import com.binabola.app.data.pref.UserPreference
 import com.binabola.app.data.remote.response.DefaultResponse
 import com.binabola.app.data.remote.response.DetailUserResponse
+import com.binabola.app.data.remote.response.GetDailyCalorieItem
 import com.binabola.app.data.remote.response.UserModel
 
 class UserRepository private constructor(
@@ -22,11 +23,13 @@ class UserRepository private constructor(
     private val regisresult = MediatorLiveData<Result<RegisterResponse>>()
     private val loginresult = MediatorLiveData<Result<UserModel>>()
     private val detailProfil = MediatorLiveData<Result<DetailUserResponse>>()
+    private val dailyCalories = MediatorLiveData<Result<List<GetDailyCalorieItem>>>()
+    private val totalCalorie = MediatorLiveData<Double>()
 
     fun register(mapdata: Map<String,String?>): LiveData<Result<RegisterResponse>> {
         regisresult.value = Result.Loading
         try{
-            var username = mapdata["email"].toString().split("@").get(0)
+            var username = mapdata["email"].toString().split("@")[0]
             val client = apiService.register(
                 username,
                 mapdata["email"].toString(),
@@ -115,11 +118,11 @@ class UserRepository private constructor(
                         val body = response.body()
                         detailProfil.value = Result.Success(body!!)
                     } else {
-//                        val jsonInString = response.errorBody()?.string()
-//                        val errorBody = Gson().fromJson(jsonInString, UserModel::class.java)
-//                        val errorMessage = errorBody.message
+                        val jsonInString = response.errorBody()?.string()
+                        val errorBody = Gson().fromJson(jsonInString, DefaultResponse::class.java)
+                        val errorMessage = errorBody.message
 
-                        loginresult.value = Result.Error(response.message())
+                        detailProfil.value = Result.Error(errorMessage.toString())
                     }
                 }
 
@@ -135,6 +138,52 @@ class UserRepository private constructor(
         }
 
         return detailProfil
+    }
+
+    fun getDailyCalories(uid: String, date: String): LiveData<Result<List<GetDailyCalorieItem>>> {
+        dailyCalories.value = Result.Loading
+
+        try{
+            val client = apiService.getDailyCalories(uid, date)
+            client.enqueue(object : Callback<List<GetDailyCalorieItem>> {
+                override fun onResponse(
+                    call: Call<List<GetDailyCalorieItem>>,
+                    response: Response<List<GetDailyCalorieItem>>
+                ) {
+                    if(response.isSuccessful) {
+                        val body = response.body()
+                        dailyCalories.value = Result.Success(body!!)
+
+                        totalCalorie.value = body.sumOf {
+                            it.total?.toDouble() ?: 0.0
+                        }
+                    } else {
+                        val jsonInString = response.errorBody()?.string()
+                        val errorBody = Gson().fromJson(jsonInString, DefaultResponse::class.java)
+                        val errorMessage = errorBody.message
+
+                        dailyCalories.value = Result.Error(errorMessage.toString())
+                        totalCalorie.value = 0.0
+                    }
+                }
+
+                override fun onFailure(call: Call<List<GetDailyCalorieItem>>, t: Throwable) {
+                    t.printStackTrace()
+                    dailyCalories.value = Result.Error(t.message.toString())
+                    totalCalorie.value = 0.0
+                }
+
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+            dailyCalories.value = Result.Error(e.toString())
+        }
+
+        return dailyCalories
+    }
+
+    fun getTotalCalorie(): LiveData<Double> {
+        return totalCalorie
     }
 
     suspend fun saveSession(user: UserModel) {

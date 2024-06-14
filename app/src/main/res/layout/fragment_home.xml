@@ -16,23 +16,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <ImageButton
-        android:id="@+id/setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/outline_settings_24"
-        android:tint="@color/grey_700"
-        android:background="@android:color/transparent"
-        android:layout_margin="@dimen/margin_3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UseAppTint" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/setting"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@drawable/outline_settings_24"-->
+<!--        android:tint="@color/grey_700"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:layout_margin="@dimen/margin_3"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:ignore="UseAppTint" />-->
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
-        android:layout_marginTop="@dimen/margin_3"
         app:layout_constraintTop_toBottomOf="@id/app_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +88,7 @@
                 android:id="@+id/titleCalories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Calories"
+                android:text="Target Harian"
                 app:layout_constraintTop_toBottomOf="@id/rv_calendar"
                 android:layout_margin="@dimen/margin_3"
                 app:layout_constraintStart_toStartOf="parent"/>
@@ -98,7 +97,7 @@
                 android:id="@+id/tvTargetCalories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2,219"
+                android:text="0"
                 android:textSize="32sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/titleCalories"
@@ -106,7 +105,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="cal"
+                android:text="kcal"
                 android:layout_marginHorizontal="@dimen/margin_4"
                 app:layout_constraintBottom_toBottomOf="@id/tvTargetCalories"
                 app:layout_constraintStart_toEndOf="@id/tvTargetCalories"/>
@@ -115,7 +114,7 @@
                 android:id="@+id/progressBar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:progress="6"
+                android:progress="0"
                 android:max="10"
                 android:layout_marginHorizontal="@dimen/margin_3"
                 android:layout_marginTop="@dimen/margin_4"
@@ -147,70 +146,72 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Calories"
-                        android:layout_weight="1"/>
+                        android:text="Kalori Masuk &amp; Keluar"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/margin_3"/>
                     <TextView
+                        android:id="@+id/tv_current_calories"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="999 cal"/>
+                        android:text="0 kcal"/>
                 </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/grey_200"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/margin_3">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="Carbo"
-                        android:layout_weight="1"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="999"/>
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/grey_200"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/margin_3">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="Protein"
-                        android:layout_weight="1"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="999"/>
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/grey_200"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/margin_3">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="Fat"
-                        android:layout_weight="1"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="999"/>
-                </LinearLayout>
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:background="@color/grey_200"/>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="@dimen/margin_3">-->
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Carbo"-->
+<!--                        android:layout_weight="1"/>-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="0"/>-->
+<!--                </LinearLayout>-->
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:background="@color/grey_200"/>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="@dimen/margin_3">-->
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Protein"-->
+<!--                        android:layout_weight="1"/>-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="0"/>-->
+<!--                </LinearLayout>-->
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:background="@color/grey_200"/>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="@dimen/margin_3">-->
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Fat"-->
+<!--                        android:layout_weight="1"/>-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="0"/>-->
+<!--                </LinearLayout>-->
             </LinearLayout>
 
             <TextView

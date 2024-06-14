@@ -6,11 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.binabola.app.R
 import com.binabola.app.data.Result
 import com.binabola.app.data.remote.response.GetExerciseItem
 import com.binabola.app.databinding.FragmentHomeBinding
@@ -20,13 +20,14 @@ import com.binabola.app.presentation.ViewModelFactory
 import com.binabola.app.presentation.adapter.CalendarAdapter
 import com.binabola.app.presentation.adapter.ExerciseAdapter
 import com.binabola.app.presentation.exercise.DetailExerciseActivity
+import com.binabola.app.presentation.setting.SettingFragment
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
-    private val viewModel by viewModels<MainViewModel> {
+    private val viewModel by activityViewModels<MainViewModel> {
         ViewModelFactory.getInstance(requireActivity())
     }
 
@@ -40,16 +41,37 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        initView()
+        initCalendar()
+        initCalorie()
         initExercise()
         return view
     }
 
-    private fun initView() {
+    private fun openSetting() {
+        val fragmentManager = requireActivity().supportFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        val settingFragment = SettingFragment()
+        transaction.replace(R.id.flFragment, settingFragment)
+//        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    private fun initCalendar() {
         val listDate = generateDates()
 
         calAdapter = CalendarAdapter { calendar ->
             println("SELECTED DATE: ${calendar.get(Calendar.DATE)}")
+
+            val selectedDate = calendar.get(Calendar.DATE).toString()
+            var selectedMonth = (calendar.get(Calendar.MONTH) + 1).toString()
+            val selectedYear = calendar.get(Calendar.YEAR).toString()
+
+            if(selectedMonth.length == 1) {
+                selectedMonth = "0$selectedMonth"
+            }
+
+            val dateString  = "$selectedYear-$selectedMonth-$selectedDate"
+            viewModel.setDate(dateString)
         }
 
         calAdapter.submitList(listDate)
@@ -71,6 +93,31 @@ class HomeFragment : Fragment() {
         updateCurrentMonth()
     }
 
+    private fun initCalorie() {
+        viewModel.profile.observe(viewLifecycleOwner) {user ->
+            if(user != null) {
+                println(user.toString())
+                binding.tvTargetCalories.text = user.calorie
+                binding.progressBar.max = user.calorie!!.toDouble().toInt()
+
+                viewModel.getTotalCalories().observe(viewLifecycleOwner) {
+                    println("TOTAL CALORIES: ${user.calorie}")
+                    binding.tvCurrentCalories.text = "$it kcal"
+
+                    val percentage = it.toInt()
+                    println("PROGRESS = $percentage")
+                    binding.progressBar.progress = percentage
+                }
+            }
+        }
+
+        viewModel.currentDate.observe(viewLifecycleOwner) {
+            viewModel.profile.observe(viewLifecycleOwner) { user ->
+                viewModel.getDailyCalories(user.id.toString(), it)
+            }
+        }
+    }
+
     private fun initExercise() {
         val exAdapter = ExerciseAdapter{
             val id = it.id
@@ -84,14 +131,12 @@ class HomeFragment : Fragment() {
         viewModel.getExercises().observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+
                 }
                 is Result.Error -> {
-                    binding.progressBar.visibility = View.GONE
                     AppUtil().showToast(requireActivity(), it.error)
                 }
                 is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
                     val data = it.data
                     println("DATA: $data")
                     exAdapter.submitList(data)
