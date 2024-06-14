@@ -61,6 +61,7 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.9.0")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("androidx.activity:activity-ktx:1.9.0")
+    implementation("androidx.activity:activity:1.9.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -83,5 +84,6 @@ dependencies {
 
     implementation("androidx.camera:camera-view:$cameraxVersion")
     implementation("androidx.camera:camera-extensions:$cameraxVersion")
-    implementation("com.google.mlkit:pose-detection-accurate:18.0.0-beta4")
+    implementation ("com.google.mlkit:pose-detection:18.0.0-beta4")
+    implementation ("com.google.mlkit:pose-detection-accurate:18.0.0-beta4")
 }
