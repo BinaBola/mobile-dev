@@ -8,7 +8,7 @@ import retrofit2.http.Part
 
 interface MlApiService {
     @Multipart
-    @POST("/prediction")
+    @POST("predict")
     suspend fun predictImage(
         @Part image: MultipartBody.Part,
     ): PredictFoodResponse

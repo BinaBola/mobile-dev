@@ -21,7 +21,7 @@ android {
         debug{
             isMinifyEnabled = false
             buildConfigField("String", "BASE_URL", "\"https://trial-capstone-425907.et.r.appspot.com/\"")
-            buildConfigField("String", "ML_URL", "\"\"")
+            buildConfigField("String", "ML_URL", "\"https://backend-ml-w3oyzwsduq-et.a.run.app/\"")
         }
         release {
             isMinifyEnabled = false
