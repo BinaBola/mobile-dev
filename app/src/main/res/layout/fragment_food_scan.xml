@@ -53,7 +53,7 @@
         tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
     <ImageView
-        android:id="@+id/img_story"
+        android:id="@+id/img"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center_horizontal"

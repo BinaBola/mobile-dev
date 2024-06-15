@@ -1,5 +1,6 @@
 package com.binabola.app.presentation.food
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,6 +13,8 @@ import com.binabola.app.R
 import com.binabola.app.databinding.FragmentFoodBinding
 import com.binabola.app.databinding.FragmentHomeBinding
 import com.binabola.app.presentation.adapter.CalendarAdapter
+import com.binabola.app.presentation.foodscan.FoodScanFragment
+import com.binabola.app.presentation.register.RegisterActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -53,6 +56,11 @@ class FoodFragment : Fragment() {
 
         binding.btnPrevWeek.setOnClickListener {
             onPrevButtonClick()
+        }
+
+        binding.btnaddfood.setOnClickListener {
+            val intent = Intent(requireContext(), FoodScanFragment::class.java)
+            startActivity(intent)
         }
 
         updateCurrentMonth()

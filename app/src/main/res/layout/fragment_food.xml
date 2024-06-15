@@ -121,7 +121,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tabs"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnaddfood"
                 android:includeFontPadding="false"
                 app:rippleColor="#40FFFFFF"
                 app:cornerRadius="8dp"
