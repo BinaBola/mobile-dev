@@ -1,15 +1,17 @@
 package com.binabola.app.presentation
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.binabola.app.R
 import com.binabola.app.databinding.ActivityMainBinding
 import com.binabola.app.presentation.food.FoodFragment
 import com.binabola.app.presentation.home.HomeFragment
+import com.binabola.app.presentation.predictfood.PredictFoodActivity
 import com.binabola.app.presentation.profile.ProfileFragment
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         viewModel.getSession().observe(this) {
             if(!it.isLogin) {
                 val intent = Intent(this, WelcomeActivity::class.java)
@@ -37,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 //                viewModel.getExercises()
             }
         }
+
 
         setCurrentFragment(homeFragment)
 

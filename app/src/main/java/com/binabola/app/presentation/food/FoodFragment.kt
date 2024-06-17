@@ -1,17 +1,17 @@
 package com.binabola.app.presentation.food
 
+import android.content.Context
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.binabola.app.R
 import com.binabola.app.databinding.FragmentFoodBinding
-import com.binabola.app.databinding.FragmentHomeBinding
 import com.binabola.app.presentation.adapter.CalendarAdapter
 import com.binabola.app.presentation.foodscan.FoodScanFragment
 import com.binabola.app.presentation.register.RegisterActivity
@@ -29,11 +29,22 @@ class FoodFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFoodBinding.inflate(inflater, container, false)
-        val view = binding.root
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+
+
 
         initView()
-        return view
+
     }
+
+
+
 
     private fun initView() {
         val listDate = generateDates()
@@ -58,21 +69,12 @@ class FoodFragment : Fragment() {
             onPrevButtonClick()
         }
 
-        binding.btnaddfood.setOnClickListener {
-            val intent = Intent(requireContext(), FoodScanFragment::class.java)
-            startActivity(intent)
-        }
-
         updateCurrentMonth()
     }
 
     private fun generateDates(startDate: Calendar = Calendar.getInstance()): List<Calendar> {
         val dates = mutableListOf<Calendar>()
 
-        // Set the calendar to the first day of the current week
-//        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
-
-        // Add the next 7 days
         repeat(7) {
             val date = startDate.clone() as Calendar
             dates.add(date)
@@ -115,10 +117,6 @@ class FoodFragment : Fragment() {
     private fun showToast(message: String) {
         Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 }
+
+

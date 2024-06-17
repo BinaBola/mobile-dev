@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.food.FoodFragment">
 
+
     <TextView
         android:id="@+id/app_name"
         android:layout_width="wrap_content"
@@ -42,9 +43,9 @@
             android:layout_marginTop="@dimen/margin_3"
             android:background="@android:color/transparent"
             android:src="@drawable/baseline_arrow_back_ios_24"
-            android:tint="@color/colorPrimaryGreen"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimaryGreen" />
 
         <TextView
             android:id="@+id/tvMonth"

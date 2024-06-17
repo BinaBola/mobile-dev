@@ -35,7 +35,7 @@
         android:textSize="16sp" />
 
     <ImageView
-        android:id="@+id/img_story_holder"
+        android:id="@+id/img_holder"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"

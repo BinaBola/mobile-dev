@@ -1,4 +1,4 @@
-package com.binabola.app
+package com.binabola.app.presentation
 
 import com.binabola.app.data.model.ApiConstant
 import com.binabola.app.data.remote.retrofit.MlApiService
@@ -31,7 +31,7 @@ class BinaBolaModule {
             .baseUrl(ApiConstant.ML_BASE_URL).build()
     }
     @Singleton
-    fun mlApiService(@MlApi retrofit : Retrofit) : MlApiService = retrofit.create(MlApiService::class.java)
+    fun mlApiService (@MlApi retrofit : Retrofit) : MlApiService = retrofit.create(MlApiService::class.java)
 
 }
 @Qualifier

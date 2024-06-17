@@ -34,7 +34,7 @@
             android:id="@+id/galleryButton"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:layout_marginEnd="64dp"
+            android:layout_marginEnd="96dp"
             android:backgroundTint="@color/grey_800"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"

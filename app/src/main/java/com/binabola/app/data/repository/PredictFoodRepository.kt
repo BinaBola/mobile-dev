@@ -3,7 +3,7 @@ package com.binabola.app.data.repository
 import android.util.Log
 import com.binabola.app.data.remote.response.PredictFoodResponse
 import com.binabola.app.data.remote.retrofit.MlApiService
-import com.binabola.app.data.util.UiState
+import com.binabola.app.data.Result
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -16,10 +16,8 @@ import javax.inject.Inject
 
 class PredictFoodRepository @Inject constructor(private val mlApiService: MlApiService) {
 
-
-
-    fun predict(image : File)  : Flow<UiState<PredictFoodResponse>> = flow {
-        emit(UiState.Loading)
+    fun predict(image: File): Flow<Result<PredictFoodResponse>> = flow {
+        emit(Result.Loading)
         val requestImageFile = image.asRequestBody("image/jpeg".toMediaType())
         val multipartBody = MultipartBody.Part.createFormData(
             "image",
@@ -27,19 +25,17 @@ class PredictFoodRepository @Inject constructor(private val mlApiService: MlApiS
             requestImageFile
         )
 
-        try{
-            val predictImageRespnse = mlApiService.predictImage(multipartBody)
-
-            Log.d("WHEN PRDICT IMAGE " , predictImageRespnse.toString())
-            emit(UiState.Success(predictImageRespnse))
-
+        try {
+            val predictImageResponse = mlApiService.predictImage(multipartBody)
+            Log.d("PredictImage", predictImageResponse.toString())
+            emit(Result.Success(predictImageResponse))
         } catch (e: HttpException) {
-
-
             val errorBody = e.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, PredictFoodResponse::class.java)
-
-            errorResponse.status?.message?.let { UiState.Error(it) }?.let { emit(it) }
+            val errorMessage = errorResponse.status?.message ?: "Unknown error"
+            emit(Result.Error(errorMessage))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message ?: "Unknown error"))
         }
     }
 }
