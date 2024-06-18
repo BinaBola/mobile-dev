@@ -2,7 +2,10 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.BinaBola" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-<!--         <item name="colorPrimary">@color/colorPrimaryGreen</item>-->
+        <item name="colorPrimary">@color/colorPrimaryGreen</item>
+        <item name="android:statusBarColor" >@color/white</item>
+        <item name="android:windowLightStatusBar" >true</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 
     <style name="Theme.BinaBola" parent="Base.Theme.BinaBola" />

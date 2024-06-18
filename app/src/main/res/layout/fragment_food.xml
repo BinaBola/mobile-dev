@@ -26,8 +26,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,67 +77,70 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnNextWeek" />
-            <TextView
-                android:id="@+id/titleFood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Your Food Today"
-                app:layout_constraintTop_toBottomOf="@id/rv_calendar"
-                android:layout_margin="@dimen/margin_3"
-                app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
                 android:id="@+id/manyfood"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Calory Food 500 cal"
-                app:layout_constraintTop_toBottomOf="@id/titleFood"
+                android:text="Today's Food Intake: 0 kcal"
+                app:layout_constraintTop_toBottomOf="@id/rv_calendar"
                 android:layout_margin="@dimen/margin_3"
                 app:layout_constraintStart_toStartOf="parent"/>
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintTop_toBottomOf="@+id/manyfood"
-                app:tabGravity="fill"
-                app:tabIndicatorFullWidth="true"
-                app:tabIndicatorHeight="3dp"
-                app:tabMaxWidth="0dp"
-                app:tabMode="fixed"
-                tools:layout_editor_absoluteX="0dp" />
+<!--            <com.google.android.material.tabs.TabLayout-->
+<!--                android:id="@+id/tabs"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/manyfood"-->
+<!--                app:tabGravity="fill"-->
+<!--                app:tabIndicatorFullWidth="true"-->
+<!--                app:tabIndicatorHeight="3dp"-->
+<!--                app:tabMaxWidth="0dp"-->
+<!--                app:tabMode="fixed"-->
+<!--                tools:layout_editor_absoluteX="0dp" />-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvfood"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:paddingHorizontal="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tabs"/>
+                app:layout_constraintTop_toBottomOf="@id/manyfood"/>
 
-            <com.google.android.material.button.MaterialButton
+            <LinearLayout
+                android:id="@+id/nodata"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_1"
+                android:orientation="vertical"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/manyfood"
+                app:layout_constraintBottom_toBottomOf="parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tidak ada data"/>
+            </LinearLayout>
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/btnLogin"
                 android:includeFontPadding="false"
                 app:rippleColor="#40FFFFFF"
                 app:cornerRadius="8dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
+                app:icon="@drawable/ic_add"
+                app:iconTint="@color/white"
+                android:layout_margin="16dp"
                 android:paddingVertical="16dp"
                 android:text="Add Food"
                 android:layout_height="60dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="16sp"
                 android:backgroundTint="@color/colorPrimaryGreen"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rvfood" />
-
-
+                app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

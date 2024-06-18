@@ -15,6 +15,8 @@ import java.util.Locale
 class CalendarAdapter(private val listener: (Calendar) -> Unit) :
     ListAdapter<Calendar, CalendarAdapter.CalendarViewHolder>(CalendarDiffCallback()) {
 
+    private var currentIndex = -1
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemCalendarBinding.inflate(inflater, parent, false)
@@ -22,13 +24,13 @@ class CalendarAdapter(private val listener: (Calendar) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), position)
     }
 
     inner class CalendarViewHolder(private val binding: ItemCalendarBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(calendar: Calendar) {
+        fun bind(calendar: Calendar, index: Int) {
             val dayFormat = SimpleDateFormat("EEE", Locale.getDefault())
             val dateFormat = SimpleDateFormat("dd", Locale.getDefault())
 
@@ -39,9 +41,9 @@ class CalendarAdapter(private val listener: (Calendar) -> Unit) :
 
             // Highlight current date
             val currentDate = Calendar.getInstance()
-            if (calendar.get(Calendar.DAY_OF_YEAR) == currentDate.get(Calendar.DAY_OF_YEAR) &&
-                calendar.get(Calendar.YEAR) == currentDate.get(Calendar.YEAR)
-            ) {
+            if (((calendar.get(Calendar.DAY_OF_YEAR) == currentDate.get(Calendar.DAY_OF_YEAR) &&
+                calendar.get(Calendar.YEAR) == currentDate.get(Calendar.YEAR)) && currentIndex == -1
+            ) || currentIndex == index) {
                 binding.container.setBackgroundResource(R.drawable.bg_calendar_active)
                 binding.tvDate.setTextColor(binding.root.context.getColor(R.color.white))
                 binding.tvDay.setTextColor(binding.root.context.getColor(R.color.white))
@@ -53,6 +55,8 @@ class CalendarAdapter(private val listener: (Calendar) -> Unit) :
 
             binding.root.setOnClickListener {
                 listener(calendar)
+                currentIndex = index
+                notifyDataSetChanged()
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.binabola.app.data.remote.retrofit
 
 import com.binabola.app.data.remote.response.DetailUserResponse
+import com.binabola.app.data.remote.response.GetDailyCalorieItem
 import com.binabola.app.data.remote.response.GetDetailExercise
 import com.binabola.app.data.remote.response.GetExercise
 import com.binabola.app.data.remote.response.GetExerciseItem
@@ -47,4 +48,10 @@ interface ApiService {
     fun getDetailExercise(
         @Path("id") id: String
     ) : Call<GetDetailExercise>
+
+    @GET("calories/{userID}/{date}")
+    fun getDailyCalories(
+        @Path("userID") userID: String,
+        @Path("date") date: String
+    ) : Call<List<GetDailyCalorieItem>>
 }
