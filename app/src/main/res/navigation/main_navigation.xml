@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/foodFragment">
+
+    <fragment
+        android:id="@+id/foodFragment"
+        android:name="com.binabola.app.presentation.food.FoodFragment"
+        android:label="fragment_food"
+        tools:layout="@layout/fragment_food" >
+        <action
+            android:id="@+id/action_foodFragment_to_foodScanFragment"
+            app:destination="@id/foodScanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodScanFragment"
+        android:name="com.binabola.app.presentation.foodscan.FoodScanFragment"
+        android:label="fragment_food_scan"
+        tools:layout="@layout/fragment_food_scan" >
+        <action
+            android:id="@+id/action_foodScanFragment_to_predictFoodActivity"
+            app:destination="@id/predictFoodActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/predictFoodActivity"
+        android:name="com.binabola.app.presentation.predictfood.PredictFoodActivity"
+        android:label="activity_predict_food"
+        tools:layout="@layout/activity_predict_food" />
+
+
+</navigation>
