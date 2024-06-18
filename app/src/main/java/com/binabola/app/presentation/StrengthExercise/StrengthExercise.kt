@@ -83,17 +83,13 @@ import coil.request.ImageRequest
 import com.binabola.app.R
 import com.binabola.app.data.Result
 import com.binabola.app.data.remote.model.AllExerciseRespone
-import com.binabola.app.data.repository.AllExerciseRepository
+import com.binabola.app.data.remote.model.DetailExercise
+import com.binabola.app.ml.PoseDetectorProcessor
 import com.google.android.gms.tasks.TaskExecutors
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.mlkit.common.MlKitException
 import com.google.mlkit.vision.pose.Pose
 import com.google.mlkit.vision.pose.PoseLandmark
-import com.rifqi.fitmate.R
-import com.rifqi.fitmate.data.remote.model.DetailExercise
-import com.rifqi.fitmate.data.util.UiState
-import com.rifqi.fitmate.ml.PoseDetectorProcessor
-import com.binabola.app.data.remote.model.DetailExercise
 import kotlinx.coroutines.delay
 import kotlin.math.abs
 import kotlin.math.atan2
@@ -453,7 +449,7 @@ fun StrengthExercise(
                                 Column {
 
                                     GifImage(
-                                        data.data?.gifUrl ?: ""
+                                        data.data?.photo ?: ""
                                     )
 
 
@@ -608,7 +604,7 @@ fun CameraPreview(
                 if (isSafeZone) {
                     ColoredBorderBox(
                         modifier = Modifier.fillMaxSize(),
-                        borderColor = lightblue60
+                        borderColor = colorPrimaryGreen
                     )
                 } else {
                     ColoredBorderBox(
@@ -733,7 +729,7 @@ fun DetectedPose(
         if (pose.getPoseLandmark(PoseLandmark.LEFT_SHOULDER) != null) {
             Canvas(modifier = Modifier.fillMaxSize()) {
                 val strokeWidth = 1.dp.toPx()
-                val primaryPaint = SolidColor(lightblue60)
+                val primaryPaint = SolidColor(colorPrimaryGreen)
 
 
                 val needToMirror = sourceInfo.isImageFlipped

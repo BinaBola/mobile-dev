@@ -1,5 +1,6 @@
 package com.binabola.app.data.remote.retrofit
 
+import com.binabola.app.data.remote.model.AllExerciseRespone
 import com.binabola.app.data.remote.response.DetailUserResponse
 import com.binabola.app.data.remote.response.GetDetailExercise
 import com.binabola.app.data.remote.response.GetExercise
@@ -12,6 +13,7 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
     @FormUrlEncoded
@@ -47,4 +49,9 @@ interface ApiService {
     fun getDetailExercise(
         @Path("id") id: String
     ) : Call<GetDetailExercise>
+
+    @GET("/getDetailExercise")
+    suspend fun getAllExercise(
+        @Query("exercise_id") id: Int
+    ): AllExerciseRespone
 }

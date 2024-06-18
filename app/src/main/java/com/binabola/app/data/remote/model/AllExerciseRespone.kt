@@ -47,48 +47,48 @@ data class InteractiveBodyPartSegmentValue(
 
 data class DetailExercise(
 
-    @field:SerializedName("overview")
-    val overview: String? = null,
-
-    @field:SerializedName("level")
-    val level: Int? = null,
-
-    @field:SerializedName("required_equipment")
-    val requiredEquipment: Int? = null,
-
-    @field:SerializedName("interactive_setting")
-    val interactiveSetting: InteractiveSetting? = null,
-
-    @field:SerializedName("rating")
-    val rating: Int? = null,
-
-    @field:SerializedName("cal_estimation")
-    val calEstimation: Int? = null,
-
-    @field:SerializedName("gif_url")
-    val gifUrl: String? = null,
-
-    @field:SerializedName("is_support_interactive")
-    val isSupportInteractive: Int? = null,
+    @field:SerializedName("id")
+    val id: Int? = null,
 
     @field:SerializedName("name")
     val name: String? = null,
 
-    @field:SerializedName("interactive_body_part_segment_value")
-    val interactiveBodyPartSegmentValue: InteractiveBodyPartSegmentValue? = null,
+    @field:SerializedName("level")
+    val level: Int? = null,
+
+    @field:SerializedName("calorie_out")
+    val calorieOut: Int? = null,
+
+    @field:SerializedName("required_equipment")
+    val requiredEquipment: Int? = null,
+
+    @field:SerializedName("detail")
+    val detail: String? = null,
+
+    @field:SerializedName("duration")
+    val duration: Int? = null,
 
     @field:SerializedName("step")
     val step: String? = null,
 
+    @field:SerializedName("category")
+    val category: Category? = null,
+
+    @field:SerializedName("is_support_interactive")
+    val isSupportInteractive: Int? = null,
+
+    @field:SerializedName("interactive_setting")
+    val interactiveSetting: InteractiveSetting? = null,
+
+    @field:SerializedName("interactive_body_part_segment_value")
+    val interactiveBodyPartSegmentValue: InteractiveBodyPartSegmentValue? = null,
+
     @field:SerializedName("body_part_needed")
     val bodyPartNeeded: List<String?>? = null,
 
-    @field:SerializedName("id")
-    val id: Int? = null,
+    @field:SerializedName("foto")
+    val photo: String? = null,
 
-    @field:SerializedName("photo_url")
-    val photoUrl: String? = null,
-
-    @field:SerializedName("category")
-    val category: Category? = null
+    @field:SerializedName("video")
+    val video: String? = null
 )

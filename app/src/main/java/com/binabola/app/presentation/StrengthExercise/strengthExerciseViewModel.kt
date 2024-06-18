@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.binabola.app.data.repository.AllExerciseRepository
 import com.binabola.app.presentation.InteractiveUiState
 import com.binabola.app.data.Result
+import com.binabola.app.data.remote.model.AllExerciseRespone
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,6 +19,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,13 +32,13 @@ class InteractiveLearnViewModel  @Inject constructor(private val repository: All
     private val _uiState = MutableStateFlow(InteractiveUiState())
     val uiState: StateFlow<InteractiveUiState> = _uiState.asStateFlow()
 
-    private val _exercise: MutableStateFlow<Result<AllExerciseRepository>> =
+    private val _exercise: MutableStateFlow<Result<AllExerciseRespone>> =
         MutableStateFlow(Result.Loading)
 
     private var timer: CountDownTimer? = null
     private val initialTime = MutableLiveData<Long>()
     private val currentTime = MutableLiveData<Long>()
-    val exercise: StateFlow<Result<AllExerciseRepository>>
+    val exercise: StateFlow<Result<AllExerciseRespone>>
         get() = _exercise
 
     var currentTimeString by mutableStateOf("")
@@ -171,7 +175,7 @@ class InteractiveLearnViewModel  @Inject constructor(private val repository: All
             )
 
         }
-        updateExerciseSchedule(_uiState.value.exerciseId,currentDate )
+
     }
 
     fun increaseCount() {
@@ -210,8 +214,14 @@ class InteractiveLearnViewModel  @Inject constructor(private val repository: All
 
     }
 
+
     override fun onCleared() {
         super.onCleared()
         timer?.cancel()
     }
+}
+fun formatDate(timestamp: Long): String {
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    val date = Date(timestamp)
+    return dateFormat.format(date)
 }

@@ -4,13 +4,14 @@ import com.binabola.app.data.Result
 import com.binabola.app.data.local.FakeData
 import com.binabola.app.data.model.Exercise
 import com.binabola.app.data.remote.model.AllExerciseRespone
+import com.binabola.app.data.remote.retrofit.ApiService
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import javax.inject.Inject
 
-class AllExerciseRepository @Inject constructor(private val exerciseApiService: ){
+class AllExerciseRepository @Inject constructor(private val exerciseApiService: ApiService){
 
     private val exercises = mutableListOf<Exercise>()
 
@@ -41,34 +42,10 @@ class AllExerciseRepository @Inject constructor(private val exerciseApiService: 
         }
     }
 
-    fun getWorkoutByIdMuscle(muscleId: Int): Flow<Result<ExerciseResponse>> = flow  {
-        emit(Result.Loading)
-        try {
-            val muscleResponse = exerciseApiService.getExerciseList(muscleId)
-            emit(Result.Success(muscleResponse))
-        } catch (e: HttpException) {
-            val errorBody = e.response()?.errorBody()?.string()
-            val errorResponse = Gson().fromJson(errorBody, ExerciseResponse::class.java)
-            errorResponse.message?.let { Result.Error(it) }?.let { emit(it) }
-        }
-
-    }
-
-    fun getAllMuscleCategory(): Flow<Result<MuscleResponse>> = flow {
+    fun getExerciseById(exerciseId : Long): Flow<Result<AllExerciseRespone>> = flow{
         emit(Result.Loading)
         try{
-            val muscleResponse = exerciseApiService.getMuscleList()
-            emit(Result.Success(muscleResponse))
-        } catch (e: HttpException) {
-            val errorBody = e.response()?.errorBody()?.string()
-            val errorResponse = Gson().fromJson(errorBody, MuscleResponse::class.java)
-            errorResponse.message?.let { Result.Error(it) }?.let { emit(it) }
-        }
-    }
-    fun getExerciseById(workoutId: Long): Flow<Result<AllExerciseRespone>> = flow{
-        emit(Result.Loading)
-        try{
-            val detailExerciseResponse = exerciseApiService.getDetailExercise(workoutId.toInt())
+            val detailExerciseResponse = exerciseApiService.getAllExercise(exerciseId.toInt())
             emit(Result.Success(detailExerciseResponse))
 
         } catch (e: HttpException) {
