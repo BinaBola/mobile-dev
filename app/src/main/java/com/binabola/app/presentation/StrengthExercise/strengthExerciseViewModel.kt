@@ -1,4 +1,4 @@
-package com.rifqi.fitmate.ui.screens.interactivelearn
+package com.binabola.app.presentation.StrengthExercise
 
 import android.os.CountDownTimer
 import android.text.format.DateUtils
@@ -9,7 +9,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.binabola.app.data.repository.AllExerciseRepository
-import com.binabola.app.data.repository.ExerciseRepository
 import com.binabola.app.presentation.InteractiveUiState
 import com.binabola.app.data.Result
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -3,6 +3,7 @@ package com.binabola.app.data.repository
 import com.binabola.app.data.Result
 import com.binabola.app.data.local.FakeData
 import com.binabola.app.data.model.Exercise
+import com.binabola.app.data.remote.model.AllExerciseRespone
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -64,7 +65,7 @@ class AllExerciseRepository @Inject constructor(private val exerciseApiService: 
             errorResponse.message?.let { Result.Error(it) }?.let { emit(it) }
         }
     }
-    fun getExerciseById(workoutId: Long): Flow<Result<DetailExerciseRespone>> = flow{
+    fun getExerciseById(workoutId: Long): Flow<Result<AllExerciseRespone>> = flow{
         emit(Result.Loading)
         try{
             val detailExerciseResponse = exerciseApiService.getDetailExercise(workoutId.toInt())
@@ -72,7 +73,7 @@ class AllExerciseRepository @Inject constructor(private val exerciseApiService: 
 
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
-            val errorResponse = Gson().fromJson(errorBody, DetailExerciseRespone::class.java)
+            val errorResponse = Gson().fromJson(errorBody, AllExerciseRespone::class.java)
             errorResponse.message?.let { Result.Error(it) }?.let { emit(it) }
         }
     }

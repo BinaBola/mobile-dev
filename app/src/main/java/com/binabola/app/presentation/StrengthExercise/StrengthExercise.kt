@@ -80,7 +80,9 @@ import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
+import com.binabola.app.R
 import com.binabola.app.data.Result
+import com.binabola.app.data.remote.model.AllExerciseRespone
 import com.binabola.app.data.repository.AllExerciseRepository
 import com.google.android.gms.tasks.TaskExecutors
 import com.google.common.util.concurrent.ListenableFuture
@@ -89,13 +91,9 @@ import com.google.mlkit.vision.pose.Pose
 import com.google.mlkit.vision.pose.PoseLandmark
 import com.rifqi.fitmate.R
 import com.rifqi.fitmate.data.remote.model.DetailExercise
-import com.rifqi.fitmate.data.remote.model.DetailExerciseRespone
 import com.rifqi.fitmate.data.util.UiState
 import com.rifqi.fitmate.ml.PoseDetectorProcessor
-import com.rifqi.fitmate.ui.screens.interactivelearn.InteractiveLearnViewModel
-import com.rifqi.fitmate.ui.theme.lightblue60
-import com.rifqi.fitmate.ui.theme.neutral10
-import com.rifqi.fitmate.ui.theme.neutral80
+import com.binabola.app.data.remote.model.DetailExercise
 import kotlinx.coroutines.delay
 import kotlin.math.abs
 import kotlin.math.atan2
@@ -130,7 +128,7 @@ fun StrengthExercise(
         }
 
         is Result.Success<*> -> {
-            val data = (exerciseState as Result.Success<AllExerciseRepository>).data
+            val data = (exerciseState as Result.Success<AllExerciseRespone>).data
 
             viewModel.initialateCounter(
                 data.data?.id?.toLong(),
@@ -501,7 +499,7 @@ fun StrengthExercise(
             }
         }
 
-        is UiState.Error -> {
+        is Result.Error -> {
             Text(stringResource(id = R.string.error_message))
         }
     }
