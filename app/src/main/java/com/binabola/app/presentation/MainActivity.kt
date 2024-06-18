@@ -6,11 +6,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.binabola.app.R
+import com.binabola.app.data.Result
 import com.binabola.app.databinding.ActivityMainBinding
 import com.binabola.app.presentation.food.FoodFragment
 import com.binabola.app.presentation.home.HomeFragment
 import com.binabola.app.presentation.predictfood.PredictFoodActivity
 import com.binabola.app.presentation.profile.ProfileFragment
+import com.binabola.app.presentation.setting.SettingFragment
+import java.util.Calendar
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     private val homeFragment = HomeFragment()
     private val foodFragment = FoodFragment()
-    private val profileFragment = ProfileFragment()
+    private val profileFragment = SettingFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +39,40 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             } else {
-                viewModel.getProfile(it.userId.toString())
-//                viewModel.getExercises()
+                viewModel.getProfile(it.userId.toString()).observe(this) {profile ->
+                    if(profile != null && profile is Result.Success) {
+                        println("GET PROFILE: $profile")
+                        viewModel.setProfile(profile.data)
+
+                        val calendar = Calendar.getInstance()
+                        val selectedDate = calendar.get(Calendar.DATE).toString()
+                        var selectedMonth = (calendar.get(Calendar.MONTH) + 1).toString()
+                        val selectedYear = calendar.get(Calendar.YEAR).toString()
+
+                        if(selectedMonth.length == 1) {
+                            selectedMonth = "0$selectedMonth"
+                        }
+
+                        val dateString  = "$selectedYear-$selectedMonth-$selectedDate"
+                        viewModel.setDate(dateString)
+
+                        viewModel.getDailyCalories(profile.data.id.toString(),dateString).observe(this) {food ->
+                            when(food) {
+                                is Result.Loading -> {
+
+                                }
+                                is Result.Success -> {
+                                    println("GET DAILY CALORIES: ${food.data}")
+                                    viewModel.setListFood(food.data)
+                                }
+                                is Result.Error -> {
+                                    AppUtil().showToast(this@MainActivity, food.error)
+                                }
+                            }
+                        }
+                    }
+                }
+                viewModel.getExercises()
             }
         }
 
