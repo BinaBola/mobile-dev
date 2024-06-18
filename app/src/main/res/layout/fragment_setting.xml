@@ -7,14 +7,28 @@
     android:orientation="vertical"
     tools:context=".presentation.setting.SettingFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimaryGreen"
-        app:navigationIcon="@drawable/baseline_arrow_back_ios_24"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/toolBar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?attr/actionBarSize"-->
+<!--        android:background="@color/colorPrimaryGreen"-->
+<!--        app:navigationIcon="@drawable/baseline_arrow_back_ios_24"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="user_name"
+        android:textSize="@dimen/font_size_large"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_margin="@dimen/margin_3"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_400"
+        android:layout_marginHorizontal="@dimen/margin_3"/>
 
     <com.binabola.app.base.component.SettingButton
         android:id="@+id/btnChangeLanguange"
