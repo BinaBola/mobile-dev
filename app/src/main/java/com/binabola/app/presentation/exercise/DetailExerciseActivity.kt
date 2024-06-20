@@ -1,12 +1,18 @@
 package com.binabola.app.presentation.exercise
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.InputType
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -17,6 +23,9 @@ import com.binabola.app.databinding.ActivityDetailExerciseBinding
 import com.binabola.app.presentation.AppUtil
 import com.binabola.app.presentation.MainViewModel
 import com.binabola.app.presentation.ViewModelFactory
+import com.binabola.app.presentation.predictfood.PredictFoodActivity
+import com.binabola.app.presentation.predictfood.PredictFoodActivity.Companion
+
 import com.binabola.app.presentation.strenghexercise.StrenghExerciseActivity
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
@@ -25,10 +34,13 @@ import java.util.Locale
 
 class DetailExerciseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailExerciseBinding
+    private val CAMERA_PERMISSION_REQUEST_CODE = 100
     private val viewModel by viewModels<MainViewModel> {
         ViewModelFactory.getInstance(this)
     }
     private lateinit var id : String
+
+    private val cameracode = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +49,7 @@ class DetailExerciseActivity : AppCompatActivity() {
 
         id = intent.getStringExtra(EXTRA_ID) ?: ""
         println("ID: $id")
+        requestPermissions()
 
 //        binding.btnAction.setOnClickListener {
 //            startMission(id)
@@ -57,6 +70,7 @@ class DetailExerciseActivity : AppCompatActivity() {
                         if((data.data.status ?: 0) == 0) {
                             binding.btnAction.text = "Mulai Latihan"
                             binding.btnAction.setOnClickListener {
+
                                 startMission(data.data.id.toString(), data.data.category.toString())
                             }
                         } else if((data.data.status ?: 0) == 1) {
@@ -117,6 +131,18 @@ class DetailExerciseActivity : AppCompatActivity() {
 
 
     }
+
+    private fun requestPermissions() {
+        val permissions = mutableListOf<String>()
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            permissions.add(Manifest.permission.CAMERA)
+        }
+        
+        if (permissions.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, permissions.toTypedArray(), cameracode)
+        }
+    }
+
 
     private fun setupTab(data: GetDetailExercise) {
         binding.tabLayout.addOnTabSelectedListener(object:TabLayout.OnTabSelectedListener{
@@ -267,5 +293,6 @@ class DetailExerciseActivity : AppCompatActivity() {
 
     companion object{
         const val EXTRA_ID = "EXTRA_ID"
+        private const val CAMERA_PERMISSION = Manifest.permission.CAMERA
     }
 }

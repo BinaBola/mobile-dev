@@ -176,6 +176,6 @@ class PredictFoodActivity : AppCompatActivity() {
 
     companion object{
         private const val TAG = "PredictFoodActivity"
-        private const val CAMERA_PERMISSION = Manifest.permission.CAMERA
+        const val CAMERA_PERMISSION = Manifest.permission.CAMERA
     }
 }
