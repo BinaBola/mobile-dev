@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/margin_4"
@@ -10,30 +11,35 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="@dimen/margin_3">
+
         <ImageView
+            android:id="@+id/foto"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/placeholder"
             android:scaleType="centerCrop"
-            android:layout_marginEnd="@dimen/margin_4"/>
+            android:layout_marginEnd="@dimen/margin_4" />
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Mission Title"
-                android:textSize="@dimen/font_size_large"/>
+                android:textSize="@dimen/font_size_large" />
+
             <TextView
                 android:id="@+id/tvDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minLines="2"
-                android:text="Supporting or descriptive text for the card goes lorem ipsum dolor sit amet"/>
+                android:text="Supporting or descriptive text for the card goes lorem ipsum dolor sit amet" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -41,12 +47,13 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_marginTop="@dimen/margin_4">
+
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:src="@drawable/outline_watch_later_24"
-                    android:tint="@color/colorPrimaryGreen"
-                    android:layout_marginEnd="4dp"/>
+                    android:layout_marginEnd="4dp"
+                    app:tint="@color/colorPrimaryGreen" />
                 <TextView
                     android:id="@+id/tv_duration"
                     android:layout_width="wrap_content"
@@ -61,8 +68,8 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:src="@drawable/baseline_local_fire_department_24"
-                    android:tint="@color/colorPrimaryGreen"
-                    android:layout_marginEnd="4dp"/>
+                    android:layout_marginEnd="4dp"
+                    app:tint="@color/colorPrimaryGreen" />
                 <TextView
                     android:id="@+id/tv_cal"
                     android:layout_width="wrap_content"

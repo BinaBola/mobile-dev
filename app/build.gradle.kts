@@ -88,6 +88,7 @@ dependencies {
     implementation("com.google.mlkit:common:18.10.0")
     implementation("com.google.mlkit:pose-detection-common:17.0.0")
     implementation("com.google.mlkit:pose-detection-accurate:17.0.0")
+    implementation("androidx.activity:activity:1.9.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

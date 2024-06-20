@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.onboarding.Onboarding2Activity">
+
+    <TextView
+        android:id="@+id/skipButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:textStyle="bold"
+        android:text="Skip"
+        android:textSize="16sp" />
+
+    <!-- Illustration ImageView -->
+    <ImageView
+        android:id="@+id/illustrationImageView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:contentDescription="Illustration"
+        android:src="@drawable/onboading_2" />
+
+    <!-- Title TextView -->
+
+    <!-- Description TextView -->
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/illustrationImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:text="Enhance Your Training"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="Our AI-powered strength training programs ensure you perform exercises correctly, reducing injury risks and boosting effectiveness. Track your endurance with our running tracker, and improve your speed with video submission analysis. Elevate your game with the best training methods available."
+        android:textColor="#B0B0B0"
+        android:textSize="16sp" />
+
+
+
+    <!-- Next button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:includeFontPadding="false"
+        app:rippleColor="#40FFFFFF"
+        app:cornerRadius="8dp"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:backgroundTint="@color/colorPrimaryGreen"
+        android:text="Next"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

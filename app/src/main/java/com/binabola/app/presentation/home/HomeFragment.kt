@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -40,11 +43,42 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showYesNoDialog(
+                    title = getString(R.string.title_close_app),
+                    message = getString(R.string.message_close_app),
+                    onYes = {
+                        closeApp()
+                    }
+                )
+            }
+        }
+
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
         initCalendar()
         initCalorie()
         initExercise()
         return view
+    }
+
+    private fun closeApp() {
+        requireActivity().finishAffinity()
+    }
+
+    private fun showYesNoDialog(title: String, message: String, onYes: () -> Unit) {
+        AlertDialog.Builder(requireContext()).apply {
+            setTitle(title)
+            setMessage(message)
+            setNegativeButton(getString(R.string.label_no)) { p0, _ ->
+                p0.dismiss()
+            }
+            setPositiveButton(getString(R.string.label_yes)) { _, _ ->
+                onYes.invoke()
+            }
+        }.create().show()
     }
 
     private fun openSetting() {

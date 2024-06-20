@@ -3,13 +3,13 @@
     <item
         android:id="@+id/home"
         android:title="Home"
-        android:icon="@drawable/baseline_home_filled_24"/>
+        android:icon="@drawable/home_svgrepo_com"/>
     <item
         android:id="@+id/food"
         android:title="Food Intake"
-        android:icon="@drawable/baseline_home_filled_24"/>
+        android:icon="@drawable/meal_food_icon"/>
     <item
         android:id="@+id/profile"
         android:title="Profile"
-        android:icon="@drawable/baseline_home_filled_24"/>
+        android:icon="@drawable/profile_svgrepo_com__2_"/>
 </menu>

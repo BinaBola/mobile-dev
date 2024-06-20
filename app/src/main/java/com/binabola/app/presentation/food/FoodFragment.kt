@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.fragment.app.activityViewModels
@@ -95,7 +97,38 @@ class FoodFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFoodBinding.inflate(inflater, container, false)
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showYesNoDialog(
+                    title = getString(R.string.title_close_app),
+                    message = getString(R.string.message_close_app),
+                    onYes = {
+                        closeApp()
+                    }
+                )
+            }
+        }
+
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
         return binding.root
+
+    }
+    private fun closeApp() {
+        requireActivity().finishAffinity()
+    }
+
+    private fun showYesNoDialog(title: String, message: String, onYes: () -> Unit) {
+        AlertDialog.Builder(requireContext()).apply {
+            setTitle(title)
+            setMessage(message)
+            setNegativeButton(getString(R.string.label_no)) { p0, _ ->
+                p0.dismiss()
+            }
+            setPositiveButton(getString(R.string.label_yes)) { _, _ ->
+                onYes.invoke()
+            }
+        }.create().show()
     }
 
     private fun initView() {

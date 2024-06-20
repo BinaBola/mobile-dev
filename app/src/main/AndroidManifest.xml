@@ -12,7 +12,7 @@
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission
-        android:name="         android.permission.WRITE_EXTERNAL_STORAGE"
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -32,7 +32,8 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" />
+            android:value="AIzaSyDsDm124BekXt6wMXtAK2YhnHPdgVtzQp0"
+        />
 
         <activity
             android:name=".presentation.exercise.TrackRunActivity"
@@ -52,6 +53,15 @@
             android:exported="false" />
         <activity
             android:name=".presentation.login.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.onboarding.Onboarding3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.onboarding.Onboarding2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.onboarding.Onboarding1Activity"
             android:exported="false" />
         <activity
             android:name=".presentation.WelcomeActivity"

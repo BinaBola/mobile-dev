@@ -34,6 +34,8 @@
     <string name="start_running">Mulai</string>
     <string name="stop_running">Berhenti</string>
     <string name="start_point">Titik Awal</string>
+    <string name="title_close_app">Close BinaBola?</string>
+    <string name="message_close_app">Apakah kamu yakin untuk keluar aplikasi?</string>
 
     <string-array name="food_categories">
         <item>Morning</item>

@@ -132,7 +132,7 @@ class DetailExerciseActivity : AppCompatActivity() {
                     }
                     1 -> {
                         binding.tvOverview.text = data.name
-                        binding.tvDetail.text = data.step
+                        binding.tvDetail.text = data.step?.let { StepByStepContent(it) }
 
                         binding.btnAction.visibility = View.VISIBLE
                         binding.btnUpload.visibility = View.GONE
@@ -172,6 +172,21 @@ class DetailExerciseActivity : AppCompatActivity() {
         }
 
         binding.btnBack.setOnClickListener { finish() }
+    }
+
+    private fun StepByStepContent(step: String): String {
+        val stepsArray = step.split(". ").toTypedArray()
+        return formatSteps(stepsArray)
+    }
+
+    private fun formatSteps(steps: Array<String>): String {
+        val formattedSteps = StringBuilder()
+
+        for ((index, step) in steps.withIndex()) {
+            formattedSteps.append("${index + 1}. $step\n")
+        }
+
+        return formattedSteps.toString().trimEnd()
     }
 
     private fun startMission(id:String, category: String) {

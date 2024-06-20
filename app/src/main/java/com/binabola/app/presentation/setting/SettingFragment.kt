@@ -42,9 +42,40 @@ class SettingFragment : Fragment() {
     ): View {
         _binding = FragmentSettingBinding.inflate(inflater, container, false)
         val view = binding.root
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showYesNoDialog1(
+                    title = getString(R.string.title_close_app),
+                    message = getString(R.string.message_close_app),
+                    onYes = {
+                        closeApp()
+                    }
+                )
+            }
+        }
+
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
         initActions()
         return view
+    }
+
+    private fun closeApp() {
+        requireActivity().finishAffinity()
+    }
+
+    private fun showYesNoDialog1(title: String, message: String, onYes: () -> Unit) {
+        AlertDialog.Builder(requireContext()).apply {
+            setTitle(title)
+            setMessage(message)
+            setNegativeButton(getString(R.string.label_no)) { p0, _ ->
+                p0.dismiss()
+            }
+            setPositiveButton(getString(R.string.label_yes)) { _, _ ->
+                onYes.invoke()
+            }
+        }.create().show()
     }
 
     private fun initActions() {
