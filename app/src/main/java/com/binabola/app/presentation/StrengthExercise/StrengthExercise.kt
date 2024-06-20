@@ -926,7 +926,7 @@ fun ScoreBox(
                 Icon(
                     painter = painterResource(id = R.drawable.stack),
                     contentDescription = null,
-                    tint = neutral10,
+                    tint = neutral80,
                     modifier = Modifier
                         .width(20.dp)
                         .height(20.dp)
