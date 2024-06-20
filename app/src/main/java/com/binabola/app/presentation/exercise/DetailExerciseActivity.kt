@@ -107,14 +107,14 @@ class DetailExerciseActivity : AppCompatActivity() {
                                 binding.tabLayout.newTab().setText("Deskripsi")
                             )
                             binding.tabLayout.addTab(
-                                binding.tabLayout.newTab().setText("Tips & Trik")
+                                binding.tabLayout.newTab().setText("Step By Step")
                             )
                         } else {
                             binding.tabLayout.addTab(
                                 binding.tabLayout.newTab().setText("Deskripsi")
                             )
                             binding.tabLayout.addTab(
-                                binding.tabLayout.newTab().setText("Tips & Trik")
+                                binding.tabLayout.newTab().setText("Step By Step")
                             )
                             binding.tabLayout.addTab(
                                 binding.tabLayout.newTab().setText("Upload")
