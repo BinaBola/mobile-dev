@@ -86,7 +86,7 @@ class FoodFragment : Fragment() {
 
         viewModel.getTotalCalories().observe(viewLifecycleOwner) {
             println("TOTAL CALORIES: $it")
-            binding.manyfood.text = "Today's Calorie Intake: $it kcal"
+            binding.manyfood.text = "Kalori Makanan yang Masuk Hari Ini: $it kcal"
         }
 
         initView()

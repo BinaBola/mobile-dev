@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".presentation.onboarding.Onboarding1Activity">
 
     <TextView
@@ -15,10 +16,10 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
         android:textStyle="bold"
-        android:text="Skip"
+        android:text="@string/skip"
         android:textSize="16sp" />
 
-    <!-- Illustration ImageView -->
+
     <ImageView
         android:id="@+id/illustrationImageView"
         android:layout_width="match_parent"
@@ -28,20 +29,17 @@
         android:contentDescription="Illustration"
         android:src="@drawable/onboading_1" />
 
-    <!-- Title TextView -->
 
-    <!-- Description TextView -->
+
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/illustrationImageView"
-        android:layout_centerHorizontal="true"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:text="Welcome to BinaBola!"
-        android:textSize="20sp"
+        android:layout_marginTop="18dp"
+        android:text="@string/welcome_to_binabola"
+        android:textSize="@dimen/font_size_large"
         android:textStyle="bold" />
 
     <TextView
@@ -49,15 +47,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/titleTextView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:text="Join us on a journey to revolutionize Indonesian football. Our app is designed to nurture young talents, helping them achieve their full potential through quality training and healthy lifestyle guidance."
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:text="@string/join_us_on_a_journey_to_revolutionize_indonesian_football_our_app_is_designed_to_nurture_young_talents_helping_them_achieve_their_full_potential_through_quality_training_and_healthy_lifestyle_guidance"
         android:textColor="#B0B0B0"
         android:textSize="16sp" />
 
 
 
-    <!-- Next button -->
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/nextButton"
         android:layout_width="wrap_content"
@@ -71,7 +70,7 @@
         android:textStyle="bold"
         android:textSize="16sp"
         android:backgroundTint="@color/colorPrimaryGreen"
-        android:text="Next"
+        android:text="@string/next"
         android:textColor="@color/white" />
 
 </RelativeLayout >

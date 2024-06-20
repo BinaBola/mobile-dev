@@ -45,4 +45,17 @@
         <item>Snack</item>
     </string-array>
     <string name="title_activity_track_run">TrackRunActivity</string>
+    <string name="start_latihan">Start Latihan</string>
+    <string name="todo">TODO</string>
+    <string name="link_video">Link video</string>
+    <string name="submit_tugas">Submit Tugas</string>
+    <string name="skip">Skip</string>
+    <string name="welcome_to_binabola">Welcome to BinaBola!</string>
+    <string name="join_us_on_a_journey_to_revolutionize_indonesian_football_our_app_is_designed_to_nurture_young_talents_helping_them_achieve_their_full_potential_through_quality_training_and_healthy_lifestyle_guidance">Join us on a journey to revolutionize Indonesian football. Our app is designed to nurture young talents, helping them achieve their full potential through quality training and healthy lifestyle guidance.</string>
+    <string name="live_a_healthy_lifestyle">Live a Healthy Lifestyle!</string>
+    <string name="proper_nutrition_is_key_to_a_successful_football_career_use_our_ai_food_feature_to_capture_images_of_your_meals_and_get_instant_nutritional_information_stay_healthy_and_optimize_your_performance_with_personalized_diet_recommendations">Proper nutrition is key to a successful football career. Use our AI Food feature to capture images of your meals and get instant nutritional information. Stay healthy and optimize your performance with personalized diet recommendations.</string>
+    <string name="enhance_your_training">Enhance Your Training</string>
+    <string name="our_ai_powered_strength_training_programs_ensure_you_perform_exercises_correctly_reducing_injury_risks_and_boosting_effectiveness_track_your_endurance_with_our_running_tracker_and_improve_your_speed_with_video_submission_analysis_elevate_your_game_with_the_best_training_methods_available">Our AI-powered strength training programs ensure you perform exercises correctly, reducing injury risks and boosting effectiveness. Track your endurance with our running tracker, and improve your speed with video submission analysis. Elevate your game with the best training methods available.</string>
+    <string name="next">Next</string>
+    <string name="illustration">Illustration</string>
 </resources>

@@ -220,7 +220,7 @@ class TrackRunActivity : AppCompatActivity(), OnMapReadyCallback {
             override fun onLocationResult(locationResult: LocationResult) {
                 var current = locationResult.lastLocation
                 if(prevLocation != null) {
-                    var dist = current.distanceTo(prevLocation!!)
+                    var dist = current!!.distanceTo(prevLocation!!)
                     distance += dist
 
                     binding.distance.text = "${distance.div(1000)} km"

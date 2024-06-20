@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".presentation.onboarding.Onboarding2Activity">
 
     <TextView
@@ -15,7 +16,7 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
         android:textStyle="bold"
-        android:text="Skip"
+        android:text="@string/skip"
         android:textSize="16sp" />
 
     <!-- Illustration ImageView -->
@@ -25,7 +26,7 @@
         android:layout_height="300dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:contentDescription="Illustration"
+        android:contentDescription="@string/illustration"
         android:src="@drawable/onboading_2" />
 
     <!-- Title TextView -->
@@ -36,11 +37,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/illustrationImageView"
-        android:layout_centerHorizontal="true"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:text="Enhance Your Training"
+        android:layout_marginTop="18dp"
+        android:text="@string/enhance_your_training"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -49,9 +48,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/titleTextView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:text="Our AI-powered strength training programs ensure you perform exercises correctly, reducing injury risks and boosting effectiveness. Track your endurance with our running tracker, and improve your speed with video submission analysis. Elevate your game with the best training methods available."
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="18dp"
+        android:text="@string/our_ai_powered_strength_training_programs_ensure_you_perform_exercises_correctly_reducing_injury_risks_and_boosting_effectiveness_track_your_endurance_with_our_running_tracker_and_improve_your_speed_with_video_submission_analysis_elevate_your_game_with_the_best_training_methods_available"
         android:textColor="#B0B0B0"
         android:textSize="16sp" />
 
@@ -71,7 +71,7 @@
         android:textStyle="bold"
         android:textSize="16sp"
         android:backgroundTint="@color/colorPrimaryGreen"
-        android:text="Next"
+        android:text="@string/next"
         android:textColor="@color/white" />
 
 </RelativeLayout>

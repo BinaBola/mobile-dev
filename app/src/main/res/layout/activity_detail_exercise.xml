@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".presentation.exercise.DetailExerciseActivity">
 
    <FrameLayout
@@ -32,6 +33,7 @@
                    android:id="@+id/tabLayout"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
+                   android:background="@color/white"
                    app:layout_constraintTop_toBottomOf="@id/guideline"/>
 <!--                   <com.google.android.material.tabs.TabItem-->
 <!--                       android:layout_width="wrap_content"-->
@@ -71,7 +73,7 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:layout_margin="@dimen/margin_3"
-                   android:hint="Link video"
+                   android:hint="@string/link_video"
                    android:visibility="gone"
                    android:longClickable="true"
                    android:textIsSelectable="true"
@@ -91,6 +93,7 @@
            android:id="@+id/btnBack"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
+           android:contentDescription="@string/todo"
            android:src="@drawable/baseline_arrow_back_ios_24"
            android:background="@android:color/transparent"
            android:layout_margin="@dimen/margin_3"
@@ -105,7 +108,7 @@
         android:backgroundTint="@color/colorPrimaryGreen"
         android:includeFontPadding="false"
         android:paddingVertical="16dp"
-        android:text="Start Latihan"
+        android:text="@string/start_latihan"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -123,7 +126,7 @@
         android:backgroundTint="@color/colorPrimaryGreen"
         android:includeFontPadding="false"
         android:paddingVertical="16dp"
-        android:text="Submit Tugas"
+        android:text="@string/submit_tugas"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"

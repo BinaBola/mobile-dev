@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/placeholder"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:layout_marginEnd="@dimen/margin_4" />
 
         <LinearLayout
