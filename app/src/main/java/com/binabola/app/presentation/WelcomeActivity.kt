@@ -24,8 +24,5 @@ class WelcomeActivity : AppCompatActivity() {
             startActivity(Intent(this@WelcomeActivity, RegisterActivity::class.java))
 
         }
-        binding.home.setOnClickListener {
-            startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
-        }
     }
 }

@@ -14,9 +14,9 @@ class FoodAdapter : ListAdapter<GetDailyCalorieItem, FoodAdapter.FoodViewHolder>
 
     inner class FoodViewHolder(private val binding: ItemFoodBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(food: GetDailyCalorieItem) {
-//            binding.name.text = exercise.name
+            binding.name.text = food.foods
             binding.category.text = food.category
-            binding.calorie.text = food.total.toString()
+            binding.calorie.text = "${food.total} kcal"
         }
     }
 

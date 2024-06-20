@@ -2,12 +2,6 @@ package com.binabola.app.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class GetExercise(
-	val exercises: List<GetExerciseItem?>? = null
-//	@field:SerializedName("GetExercise")
-//	val getExercise: List<GetExerciseItem?>? = null
-)
-
 data class GetExerciseItem(
 
 	@field:SerializedName("name")
@@ -17,5 +11,14 @@ data class GetExerciseItem(
 	val id: Int? = null,
 
 	@field:SerializedName("category")
-	val category: String? = null
+	val category: String? = null,
+
+	@field:SerializedName("duration")
+	val duration: String? = null,
+
+	@field:SerializedName("calorie_out")
+	val calorieOut: Double? = null,
+
+	@field:SerializedName("foto")
+	val foto: String? = null,
 )

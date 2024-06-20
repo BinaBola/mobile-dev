@@ -51,7 +51,7 @@ class DataFragment : Fragment() {
         binding.chooseDate.setOnClickListener {
             val dateDialog = DatePickerDialog(
                 requireActivity(),
-                { view, year, monthOfYear, dayOfMonth ->
+                { _, year, monthOfYear, dayOfMonth ->
                     currentDay = dayOfMonth
                     currentMonth = monthOfYear+1
                     currentYear = year
@@ -77,7 +77,7 @@ class DataFragment : Fragment() {
             dateDialog.show()
         }
 
-        binding.radioGender.setOnCheckedChangeListener { group, checkedId ->
+        binding.radioGender.setOnCheckedChangeListener { _, checkedId ->
             when(checkedId) {
                 R.id.rb_male -> {
                     dataMap["gender"] = "L"

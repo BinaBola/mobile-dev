@@ -108,12 +108,10 @@ class HomeFragment : Fragment() {
                     println("PROGRESS = $percentage")
                     binding.progressBar.progress = percentage
                 }
-            }
-        }
 
-        viewModel.currentDate.observe(viewLifecycleOwner) {
-            viewModel.profile.observe(viewLifecycleOwner) { user ->
-                viewModel.getDailyCalories(user.id.toString(), it)
+                viewModel.currentDate.observe(viewLifecycleOwner) {
+                    viewModel.getDailyCalories(user.id.toString(), it)
+                }
             }
         }
     }
@@ -122,7 +120,7 @@ class HomeFragment : Fragment() {
         val exAdapter = ExerciseAdapter{
             val id = it.id
             println("ID: $id")
-            viewModel.getDetailExercise(id.toString())
+//            viewModel.getDetailExercise(id.toString())
             val intent = Intent(requireContext(), DetailExerciseActivity::class.java)
             intent.putExtra(DetailExerciseActivity.EXTRA_ID, id.toString())
             startActivity(intent)

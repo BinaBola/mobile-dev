@@ -11,11 +11,23 @@ data class PredictFoodResponse(
 )
 
 data class PredictionData(
+    @field:SerializedName("Calories")
+    val calories: Double? = null,
+
+    @field:SerializedName("Carbs")
+    val carbs: Double? = null,
+
     @field:SerializedName("Confidence")
     val confidence: Double? = null,
 
+    @field:SerializedName("Fat")
+    val fat: Double? = null,
+
     @field:SerializedName("Food Prediction")
-    val foodPrediction: String? = null
+    val foodPrediction: String? = null,
+
+    @field:SerializedName("Protein")
+    val protein: String? = null
 )
 
 data class Status(

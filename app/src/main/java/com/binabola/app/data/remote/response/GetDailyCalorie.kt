@@ -11,5 +11,8 @@ data class GetDailyCalorieItem(
 	val userId: Int? = null,
 
 	@field:SerializedName("category")
-	val category: String? = null
+	val category: String? = null,
+
+	@field:SerializedName("foods")
+	val foods: String? = null
 )

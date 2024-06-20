@@ -12,7 +12,6 @@ object FakeData {
         Category("Strength"),
         Category("Speed"),
         Category("Endurance"),
-
         )
 
 
@@ -32,8 +31,8 @@ object FakeData {
             ),
             calorie_out = 500,
             photo = R.drawable.dumbbel_bicep_cover,
-            video = R.drawable.dumbbel_bicep_cover,
-            bodyPartNeeded = arrayOf("right_hand" , "left_hand" ),
+            video = R.drawable.dumbbel_bicep,
+            bodyPartNeeded = arrayOf("right_hand" , "left_hand"),
             isSupportInteractive = true,
             interactiveSetting = InteractiveExerciseSetting(
                 repetion = 12,
@@ -61,7 +60,7 @@ object FakeData {
                 " Push back up to the starting position."),
             calorie_out = 400,
             photo = R.drawable.push_up,
-            video = R.drawable.push_up,
+            video = R.drawable.push_up_model,
             bodyPartNeeded = arrayOf("right_hand" , "left_hand" ),
             isSupportInteractive = true,
             interactiveSetting = InteractiveExerciseSetting(
@@ -92,7 +91,7 @@ object FakeData {
             ),
             calorie_out = 150,
             photo = R.drawable.sumo_squat_cover,
-            video =R.drawable.sumo_squat_cover,
+            video =R.drawable.sumo_squat_model,
             bodyPartNeeded = arrayOf("right_leg" , "left_leg" ),
             isSupportInteractive = true,
             interactiveSetting = InteractiveExerciseSetting(
@@ -120,7 +119,7 @@ object FakeData {
                 "Repeat"),
             calorie_out = 180,
             photo = R.drawable.dumbbel_bicep_cover,
-            video = R.drawable.dumbbel_bicep_cover,
+            video = R.drawable.biceps_curl_ball_model,
             bodyPartNeeded = arrayOf("right_hand" , "left_hand" ),
             isSupportInteractive = true,
             interactiveSetting = InteractiveExerciseSetting(

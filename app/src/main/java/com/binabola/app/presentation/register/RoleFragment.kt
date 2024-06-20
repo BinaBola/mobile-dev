@@ -32,7 +32,7 @@ class RoleFragment : Fragment() {
     }
 
     private fun initView() {
-        binding.roleGroup.setOnCheckedChangeListener { group, checkedId ->
+        binding.roleGroup.setOnCheckedChangeListener { _, checkedId ->
             when(checkedId) {
                 R.id.radioPlayer -> {
                     preferences!!.edit().putString("role","user").apply()
