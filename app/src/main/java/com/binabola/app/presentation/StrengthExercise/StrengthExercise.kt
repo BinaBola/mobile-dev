@@ -82,8 +82,9 @@ import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
 import com.binabola.app.R
 import com.binabola.app.data.Result
-import com.binabola.app.data.remote.model.AllExerciseRespone
-import com.binabola.app.data.remote.model.DetailExercise
+import com.binabola.app.data.model.Exercise
+//import com.binabola.app.data.remote.model.DetailExercise
+//import com.binabola.app.data.remote.response.AllExerciseRespone
 import com.binabola.app.ml.PoseDetectorProcessor
 import com.google.android.gms.tasks.TaskExecutors
 import com.google.common.util.concurrent.ListenableFuture
@@ -93,7 +94,6 @@ import com.google.mlkit.vision.pose.PoseLandmark
 import kotlinx.coroutines.delay
 import kotlin.math.abs
 import kotlin.math.atan2
-
 
 @OptIn(ExperimentalGetImage::class)
 @Composable
@@ -115,20 +115,15 @@ fun StrengthExercise(
 
     when (exerciseState) {
         is Result.Loading -> {
-
             viewModel.getExerciseById(workoutId)
-
-
-
-
         }
 
         is Result.Success<*> -> {
-            val data = (exerciseState as Result.Success<AllExerciseRespone>).data
+            val data = (exerciseState as Result.Success<Exercise>).data
 
             viewModel.initialateCounter(
-                data.data?.id?.toLong(),
-                data.data?.interactiveSetting?.repetition, data.data?.interactiveSetting?.set
+                data.id,
+                data.interactiveSetting.repetion, data.interactiveSetting.set
             )
             when (configuration.orientation) {
                 Configuration.ORIENTATION_LANDSCAPE -> {
@@ -138,7 +133,7 @@ fun StrengthExercise(
                                 .fillMaxWidth()
                                 .weight(1f),
                         ) {
-                            data.data?.let {
+                            data.let {
                                 CameraPreview(
                                     exercise = it,
                                     isSafeZone = (uiState.isTutorialScreen || uiState.isInRestMode || uiState.isFinished),
@@ -449,7 +444,8 @@ fun StrengthExercise(
                                 Column {
 
                                     GifImage(
-                                        data.data?.photo ?: ""
+//                                        data.video ?: ""
+                                        data.video ?: R.drawable.placeholder
                                     )
 
 
@@ -509,7 +505,7 @@ fun StrengthExercise(
  */
 @Composable
 fun CameraPreview(
-    exercise: DetailExercise,
+    exercise: Exercise,
     isSafeZone: Boolean,
     updateCounter: () -> Unit,
     cameraLens: Int
@@ -627,7 +623,7 @@ fun CameraPreview(
 }
 
 fun areBodyPartsActive(
-    exercise: DetailExercise,
+    exercise: Exercise,
     rightArmAngle: Double,
     leftArmAngle: Double,
     rightFootAngle: Double,
@@ -635,25 +631,25 @@ fun areBodyPartsActive(
 ): Boolean {
 
 
-    return exercise.bodyPartNeeded?.all { bodyPart ->
+    return exercise.bodyPartNeeded.all { bodyPart ->
         when (bodyPart) {
             "right_hand" -> isBodyPartActive(
-                exercise.interactiveBodyPartSegmentValue?.rightArm?.toDouble() ?: 0.0,
+                exercise.interctiveBodyPartSegmentValue.rightArm?.toDouble() ?: 0.0,
                 rightArmAngle
             )
 
             "left_hand" -> isBodyPartActive(
-                exercise.interactiveBodyPartSegmentValue?.leftArm?.toDouble() ?: 0.0,
+                exercise.interctiveBodyPartSegmentValue.leftArm?.toDouble() ?: 0.0,
                 leftArmAngle
             )
 
             "right_leg" -> isBodyPartActive(
-                exercise.interactiveBodyPartSegmentValue?.rightLeg?.toDouble() ?: 0.0,
+                exercise.interctiveBodyPartSegmentValue.rightLeg?.toDouble() ?: 0.0,
                 rightFootAngle
             )
 
             "left_leg" -> isBodyPartActive(
-                exercise.interactiveBodyPartSegmentValue?.leftLeg?.toDouble() ?: 0.0,
+                exercise.interctiveBodyPartSegmentValue.leftLeg?.toDouble() ?: 0.0,
                 leftFootAngle
             )
 
@@ -687,7 +683,8 @@ private fun ColoredBorderBox(
 
 @Composable
 fun GifImage(
-    gif : String,
+//    gif : String,
+    gif : Int,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
@@ -703,9 +700,13 @@ fun GifImage(
     Image(
 
         painter = rememberAsyncImagePainter(
-            ImageRequest.Builder(context).data(data = gif).apply(block = {
-                size(coil.size.Size.ORIGINAL)
-            }).build(), imageLoader = imageLoader
+            model = gif,
+//            ImageRequest.Builder(context).data(data = gif).apply(block = {
+//                size(coil.size.Size.ORIGINAL)
+//            }).build(),
+            imageLoader = imageLoader,
+            error = painterResource(id = R.drawable.placeholder),
+            placeholder = painterResource(id = R.drawable.placeholder)
         ),
         contentDescription = null,
         modifier = modifier
@@ -904,7 +905,7 @@ fun ScoreBox(
         ) {
         Row(
             modifier = Modifier
-                .background(neutral80)
+                .background(neutral10)
                 .wrapContentSize()
                 .padding(
                     start = 16.dp,

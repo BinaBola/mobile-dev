@@ -11,7 +11,9 @@ import androidx.lifecycle.viewModelScope
 import com.binabola.app.data.repository.AllExerciseRepository
 import com.binabola.app.presentation.InteractiveUiState
 import com.binabola.app.data.Result
+import com.binabola.app.data.model.Exercise
 import com.binabola.app.data.remote.model.AllExerciseRespone
+import com.binabola.app.data.remote.response.GetDetailExercise
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -32,13 +34,13 @@ class InteractiveLearnViewModel  @Inject constructor(private val repository: All
     private val _uiState = MutableStateFlow(InteractiveUiState())
     val uiState: StateFlow<InteractiveUiState> = _uiState.asStateFlow()
 
-    private val _exercise: MutableStateFlow<Result<AllExerciseRespone>> =
+    private val _exercise: MutableStateFlow<Result<Exercise>> =
         MutableStateFlow(Result.Loading)
 
     private var timer: CountDownTimer? = null
     private val initialTime = MutableLiveData<Long>()
     private val currentTime = MutableLiveData<Long>()
-    val exercise: StateFlow<Result<AllExerciseRespone>>
+    val exercise: StateFlow<Result<Exercise>>
         get() = _exercise
 
     var currentTimeString by mutableStateOf("")
@@ -79,14 +81,11 @@ class InteractiveLearnViewModel  @Inject constructor(private val repository: All
         }
     }
 
-
     fun getExerciseById(workoutId: Long) {
         viewModelScope.launch {
             repository.getExerciseById(workoutId).catch { exception ->
                 _exercise.value = Result.Error(exception.message.orEmpty())
             }.collect { exercise ->
-
-
                 _exercise.value = exercise
 
             }

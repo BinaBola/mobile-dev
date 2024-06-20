@@ -1,33 +1,46 @@
 <resources>
     <string name="app_name">BinaBola</string>
-    <string name="action_login">Login</string>
-    <string name="action_register">Register</string>
-    <string name="label_login">Login</string>
-    <string name="label_continuegoogle">Continue with Google</string>
-    <string name="label_login_subtitle">Please Login Using Your Account To Continue</string>
+    <string name="action_login">Masuk</string>
+    <string name="action_register">Daftar</string>
+    <string name="label_login">Masuk</string>
+    <string name="label_continuegoogle">Masuk dengan Google</string>
+    <string name="label_login_subtitle">Silakan Login menggunakan akun yang terdaftar untuk melanjutkan</string>
     <string name="label_email">Email</string>
     <string name="label_password">Password</string>
-    <string name="label_register_here">Or register here</string>
-    <string name="label_register">Register</string>
-    <string name="label_register_subtitle">Create Your BinaBola Account </string>
-    <string name="label_full_name">Full Name</string>
-    <string name="hint_full_name">Enter your full name</string>
-    <string name="hint_email">Enter your email</string>
-    <string name="hint_password">Enter your password</string>
+    <string name="label_register_here">atau Daftar di sini</string>
+    <string name="label_register">Daftar</string>
+    <string name="label_register_subtitle">Buat Akun BinaBola </string>
+    <string name="label_full_name">Nama Lengkap</string>
+    <string name="hint_full_name">Masukkan nama lengkap</string>
+    <string name="hint_email">Masukkan Email</string>
+    <string name="hint_password">Masukkan Password</string>
     <string name="label_loading">Loading..</string>
-    <string name="validation_full_name">Full name only allow characters</string>
-    <string name="validation_email">Your email format is incorrect</string>
-    <string name="validation_password">Min 8 characters</string>
+    <string name="validation_full_name">Nama hanya boleh pakai huruf ya</string>
+    <string name="validation_email">Oops, format Email tidak valid</string>
+    <string name="validation_password">Minimal 8 karakter</string>
     <string name="loremipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="regis_text_1">Pilih Role</string>
+    <string name="regis_text_1">Daftar Sebagai?</string>
     <string name="regis_text_2">Isi Data Diri</string>
     <string name="regis_text_3">Isi Data Akun</string>
-    <string name="action_language_setting">Language</string>
-    <string name="settings">Settings</string>
-    <string name="action_logout" >Logout</string>
-    <string name="message_logout">Are you sure you want to logout?</string>
-    <string name="label_yes">Yes</string>
-    <string name="label_no">No</string>
-    <string name="error_message">"Something Wrong with server"</string>
+    <string name="action_language_setting">Bahasa</string>
+    <string name="settings">Pengaturan</string>
+    <string name="action_logout">Keluar</string>
+    <string name="message_logout">Apakah kamu yakin untuk keluar akun?</string>
+    <string name="label_yes">Ya</string>
+    <string name="label_no">Tidak</string>
+    <string name="error_message">Terjadi kesalahan pada server</string>
+
+    <string name="start_running">Mulai</string>
+    <string name="stop_running">Berhenti</string>
+    <string name="start_point">Titik Awal</string>
+
+    <string-array name="food_categories">
+        <item>Morning</item>
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
+        <item>Snack</item>
+    </string-array>
+    <string name="title_activity_track_run">TrackRunActivity</string>
 </resources>

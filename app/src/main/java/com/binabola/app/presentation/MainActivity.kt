@@ -11,7 +11,6 @@ import com.binabola.app.databinding.ActivityMainBinding
 import com.binabola.app.presentation.food.FoodFragment
 import com.binabola.app.presentation.home.HomeFragment
 import com.binabola.app.presentation.predictfood.PredictFoodActivity
-import com.binabola.app.presentation.profile.ProfileFragment
 import com.binabola.app.presentation.setting.SettingFragment
 import java.util.Calendar
 

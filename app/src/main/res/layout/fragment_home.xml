@@ -6,15 +6,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/app_name"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="@dimen/font_size_large"
-        android:layout_margin="@dimen/margin_3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:padding="@dimen/margin_3"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@mipmap/ic_launcher_round"
+            android:layout_marginEnd="@dimen/margin_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="@dimen/font_size_large"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/logo"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </LinearLayout>
 
 <!--    <ImageButton-->
 <!--        android:id="@+id/setting"-->
@@ -32,7 +49,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/app_name"
+        app:layout_constraintTop_toBottomOf="@id/topbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -146,7 +163,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Kalori Masuk &amp; Keluar"
+                        android:text="Kalori Masuk &amp; Terbakar"
                         android:layout_weight="1"
                         android:layout_marginEnd="@dimen/margin_3"/>
                     <TextView
@@ -218,7 +235,7 @@
                 android:id="@+id/tvTitleExercise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your Mission Today"
+                android:text="Misi Kamu Hari Ini"
                 android:textSize="@dimen/font_size_large"
                 android:layout_margin="@dimen/margin_3"
                 app:layout_constraintTop_toBottomOf="@id/containerCalories"

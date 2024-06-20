@@ -32,7 +32,9 @@ class MainViewModel(private val repository: UserRepository, private val exercise
 
     fun getProfile(uid: String) = repository.getProfile(uid)
     fun setProfile(profile: DetailUserResponse) {
-        _profile.value = profile
+        viewModelScope.launch {
+            _profile.value = profile
+        }
     }
 
     fun logout() {
@@ -43,7 +45,7 @@ class MainViewModel(private val repository: UserRepository, private val exercise
 
     fun getExercises() = exerciseRepository.getExercises()
 
-    fun getDetailExercise(id: String) = exerciseRepository.getDetailExercise(id)
+    suspend fun getDetailExercise(id: String) = exerciseRepository.getDetailExercise(id)
 
     fun getDailyCalories(uid: String, date: String) = repository.getDailyCalories(uid, date)
 
@@ -54,4 +56,8 @@ class MainViewModel(private val repository: UserRepository, private val exercise
     }
 
     fun getTotalCalories() = repository.getTotalCalorie()
+
+    suspend fun startMission(id: String) = exerciseRepository.startMission(id)
+    suspend fun finishMission(id: String) = exerciseRepository.finishMission(id)
+    suspend fun uploadLink(id: String, link: String) = exerciseRepository.uploadLink(id,link)
 }

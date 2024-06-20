@@ -1,64 +1,129 @@
 package com.binabola.app.presentation.predictfood
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
-import androidx.activity.result.ActivityResultLauncher
+import android.util.Log
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.view.PreviewView
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.binabola.app.R
 import com.binabola.app.data.Result
-import com.binabola.app.presentation.foodscan.FoodScanFragment
+import com.binabola.app.databinding.ActivityPredictFoodBinding
+import com.binabola.app.presentation.AppUtil
+import com.binabola.app.presentation.ViewModelFactory
+import com.binabola.app.presentation.foodscan.FoodScanActivity
+import com.binabola.app.utils.getImageUri
+import com.binabola.app.utils.reduceFileImage
+import com.binabola.app.utils.uriToFile
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.button.MaterialButton
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.io.File
-import java.io.FileOutputStream
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 
 class PredictFoodActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityPredictFoodBinding
+    private val viewModel by viewModels<PredictFoodViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+    private lateinit var previewView: ImageView
+    private var imageUri: Uri? = null
 
-    private lateinit var viewModel: PredictFoodViewModel
-    private lateinit var previewView: PreviewView
-    private lateinit var takePictureLauncher: ActivityResultLauncher<Intent>
-    private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
+
+    private val launcherIntentCamera = registerForActivityResult(
+        ActivityResultContracts.TakePicture()
+    ) { isSuccess ->
+        if (isSuccess) {
+            showImage()
+        }
+    }
+
+
+    private val launcherGallery = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri: Uri? ->
+        if (uri != null) {
+            imageUri = uri
+            showImage()
+        }
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions[CAMERA_PERMISSION] ?: false -> {
+                    Toast.makeText(this, "Camera permission request granted", Toast.LENGTH_LONG).show()
+                }
+                else -> {
+                    Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_predict_food)
+        binding = ActivityPredictFoodBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         previewView = findViewById(R.id.viewFinder)
         val captureButton: MaterialButton = findViewById(R.id.captureImage)
         val galleryButton: MaterialButton = findViewById(R.id.galleryButton)
 
-        captureButton.setOnClickListener { dispatchTakePictureIntent() }
-        galleryButton.setOnClickListener { openGallery() }
+        captureButton.setOnClickListener {
+            if(!checkPermission(CAMERA_PERMISSION)) {
+                requestPermissionLauncher.launch(
+                    arrayOf(
+                        CAMERA_PERMISSION,
+                    )
+                )
+                return@setOnClickListener
+            }
 
-        viewModel = ViewModelProvider(this).get(PredictFoodViewModel::class.java)
+            startCamera()
+        }
+        galleryButton.setOnClickListener {
+            startGallery()
+        }
 
         // Collect the prediction result
         lifecycleScope.launch {
             viewModel.predict.collect { result ->
+                Log.d(TAG,"collect triggered! $result")
                 when (result) {
                     is Result.Success -> {
-                        val foodName: String? = result.data.data?.foodPrediction
+                        val foodName: String? = result.data.foodPrediction
+                        val foodCalorie: String? = result.data.calories.toString()
                         if (foodName != null) {
-                            // Pass the food name to FoodScanFragment
-                            val intent = Intent(this@PredictFoodActivity, FoodScanFragment::class.java).apply {
-                                putExtra("FOOD_NAME", foodName)
-                            }
-                            startActivity(intent)
+                            // Pass the food name back to FoodScanFragment
+                            val resultIntent = Intent()
+                            resultIntent.putExtra(FoodScanActivity.EXTRA_FOOD_VALUE, foodName)
+                            resultIntent.putExtra(FoodScanActivity.EXTRA_CALORIE_VALUE, foodCalorie)
+                            resultIntent.putExtra(FoodScanActivity.EXTRA_IMG_URI, imageUri.toString())
+                            setResult(FoodScanActivity.RESULT_CODE_SCAN, resultIntent)
+                            finish()
                         } else {
                             // Handle the case where foodName is null
+                            AppUtil().showToast(this@PredictFoodActivity, "Makanan tidak dikenali")
                         }
                     }
                     is Result.Error -> {
-                        // Handle the error
+                        AppUtil().showToast(this@PredictFoodActivity, result.error)
+
                     }
                     is Result.Loading -> {
                         // Show loading
@@ -66,55 +131,51 @@ class PredictFoodActivity : AppCompatActivity() {
                 }
             }
         }
+    }
 
-        takePictureLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                val imageBitmap = result.data?.extras?.get("data") as Bitmap
-                // Convert bitmap to file and predict
-                val imageFile = bitmapToFile(imageBitmap)
-                viewModel.predictImage(imageFile)
+    private fun checkPermission(permission: String): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            permission
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun startCamera() {
+        imageUri = getImageUri(this)
+        launcherIntentCamera.launch(imageUri!!)
+    }
+
+    private fun startGallery() {
+        launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
+    private fun showImage() {
+        imageUri?.let {
+            val options = RequestOptions().transform(RoundedCorners(48))
+            Glide.with(binding.root.context).load(it).apply(options).into(binding.viewFinder)
+            uploadImage()
+        }
+    }
+
+    private fun uploadImage() {
+        imageUri?.let { uri ->
+            val imageFile = uriToFile(uri, this).reduceFileImage()
+            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+            val multipartBody = MultipartBody.Part.createFormData(
+                "image",
+                imageFile.name,
+                requestImageFile
+            )
+            Log.d(TAG, multipartBody.toString())
+
+            lifecycleScope.launch {
+                viewModel.predictImage(multipartBody)
             }
         }
-
-        galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                val selectedImageUri = result.data?.data
-                val imageFile = uriToFile(selectedImageUri!!)
-                viewModel.predictImage(imageFile)
-            }
-        }
     }
 
-    private fun dispatchTakePictureIntent() {
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if (takePictureIntent.resolveActivity(packageManager) != null) {
-            takePictureLauncher.launch(takePictureIntent)
-        }
-    }
 
-    private fun openGallery() {
-        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        galleryLauncher.launch(galleryIntent)
-    }
-
-    private fun bitmapToFile(bitmap: Bitmap): File {
-        // Convert bitmap to file
-        val file = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "temp_image.jpg")
-        val out = FileOutputStream(file)
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
-        out.flush()
-        out.close()
-        return file
-    }
-
-    private fun uriToFile(uri: Uri): File {
-        // Convert URI to file
-        val file = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "temp_image.jpg")
-        val inputStream = contentResolver.openInputStream(uri)
-        val outputStream = FileOutputStream(file)
-        inputStream?.copyTo(outputStream)
-        inputStream?.close()
-        outputStream.close()
-        return file
+    companion object{
+        private const val TAG = "PredictFoodActivity"
+        private const val CAMERA_PERMISSION = Manifest.permission.CAMERA
     }
 }

@@ -4,14 +4,17 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.binabola.app.data.repository.ExerciseRepository
+import com.binabola.app.data.repository.PredictFoodRepository
 import com.binabola.app.data.repository.UserRepository
 import com.binabola.app.di.Injection
 import com.binabola.app.presentation.login.LoginViewModel
+import com.binabola.app.presentation.predictfood.PredictFoodViewModel
 import com.binabola.app.presentation.register.RegisterViewModel
 
 class ViewModelFactory(
     private val userRepository: UserRepository,
-    private val exerciseRepository: ExerciseRepository
+    private val exerciseRepository: ExerciseRepository,
+    private val predictFoodRepository: PredictFoodRepository,
 
 ) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
@@ -26,12 +29,15 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 MainViewModel(userRepository, exerciseRepository) as T
             }
+            modelClass.isAssignableFrom(PredictFoodViewModel::class.java) -> {
+                PredictFoodViewModel(predictFoodRepository) as T
+            }
             else ->
                 throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
 
     companion object {
-        fun getInstance(context: Context): ViewModelFactory = ViewModelFactory(Injection.provideRepository(context), Injection.provideExerciseRepository(context))
+        fun getInstance(context: Context): ViewModelFactory = ViewModelFactory(Injection.provideRepository(context), Injection.provideExerciseRepository(context), Injection.providePredictRepository(context))
     }
 }

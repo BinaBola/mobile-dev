@@ -15,7 +15,7 @@
 
     <TextView
         android:id="@+id/tvMenuTitle"
-        tools:text="Language"
+        tools:text="Bahasa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

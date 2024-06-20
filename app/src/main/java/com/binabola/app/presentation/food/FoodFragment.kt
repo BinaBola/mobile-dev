@@ -1,6 +1,7 @@
 package com.binabola.app.presentation.food
 
 
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,20 +9,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.binabola.app.R
 import com.binabola.app.databinding.FragmentFoodBinding
 import com.binabola.app.presentation.adapter.CalendarAdapter
-import com.binabola.app.presentation.foodscan.FoodScanFragment
 import com.binabola.app.presentation.register.RegisterActivity
 import com.binabola.app.presentation.MainViewModel
 import com.binabola.app.presentation.ViewModelFactory
-import com.binabola.app.presentation.adapter.CalendarAdapter
 import com.binabola.app.presentation.adapter.FoodAdapter
+import com.binabola.app.presentation.foodscan.FoodScanActivity
+import com.binabola.app.presentation.foodscan.FoodScanActivity.Companion.EXTRA_FOOD_VALUE
+import com.binabola.app.presentation.foodscan.FoodScanActivity.Companion.RESULT_CODE_SCAN
+import com.binabola.app.presentation.setting.SettingFragment
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -32,6 +40,20 @@ class FoodFragment : Fragment() {
     private lateinit var calAdapter: CalendarAdapter
     private val viewModel by activityViewModels<MainViewModel> {
         ViewModelFactory.getInstance(requireActivity())
+    }
+    private val resultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if(result.resultCode == RESULT_OK) {
+            lifecycleScope.launch {
+                viewModel.currentDate.observe(viewLifecycleOwner) { date ->
+                    viewModel.getSession().observe(viewLifecycleOwner) {user->
+                        val uid = user.userId
+                        viewModel.getDailyCalories(uid.toString(),date)
+                    }
+                }
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,6 +86,8 @@ class FoodFragment : Fragment() {
             println("TOTAL CALORIES: $it")
             binding.manyfood.text = "Today's Calorie Intake: $it kcal"
         }
+
+        initView()
     }
 
     override fun onCreateView(
@@ -73,20 +97,6 @@ class FoodFragment : Fragment() {
         _binding = FragmentFoodBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-
-
-
-        initView()
-
-    }
-
-
-
 
     private fun initView() {
         val listDate = generateDates()
@@ -111,7 +121,17 @@ class FoodFragment : Fragment() {
             onPrevButtonClick()
         }
 
+        binding.btnaddfood.setOnClickListener {
+//            navController.navigate(R.id.action_foodFragment_to_foodScanFragment)
+            openAddFood()
+        }
+
         updateCurrentMonth()
+    }
+
+    private fun openAddFood() {
+        val intent = Intent(requireContext(),FoodScanActivity::class.java)
+        resultLauncher.launch(intent)
     }
 
     private fun generateDates(startDate: Calendar = Calendar.getInstance()): List<Calendar> {

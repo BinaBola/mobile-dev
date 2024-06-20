@@ -33,10 +33,6 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             loginAttempt()
         }
-
-        binding.btncontinue.setOnClickListener {
-            AppUtil().showToast(this, "Dalam pengembangan")
-        }
     }
 
     private fun loginAttempt() {

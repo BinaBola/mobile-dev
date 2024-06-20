@@ -1,18 +1,33 @@
 package com.binabola.app.presentation.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.binabola.app.data.remote.response.GetExerciseItem
 import com.binabola.app.databinding.ItemMissionBinding
+import kotlin.time.Duration
 
 class ExerciseAdapter(private val listener: (GetExerciseItem) -> Unit) : ListAdapter<GetExerciseItem, ExerciseAdapter.ExerciseViewHolder>(ExerciseDiffCallback()) {
     inner class ExerciseViewHolder(private val binding: ItemMissionBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(exercise: GetExerciseItem) {
             binding.tvTitle.text = exercise.name
             binding.tvDesc.text = exercise.category
+            binding.tvCal.text = "${exercise.calorieOut} kcal"
+
+            if (exercise.duration != null && exercise.duration.contains(":")) {
+                val durations = exercise.duration.toString().split(":")
+                binding.tvDuration.text = if(durations[2] == "00") {
+                    "${durations[1]} mnt"
+                } else {
+                    "${durations[1]} mnt, ${durations[2]} dtk"
+                }
+            } else {
+                binding.tvDuration.visibility = View.GONE
+            }
+
             binding.root.setOnClickListener{
                 listener(exercise)
             }
