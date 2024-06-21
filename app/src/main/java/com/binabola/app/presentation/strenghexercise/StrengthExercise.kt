@@ -1,4 +1,4 @@
-package com.binabola.app.presentation.strengthExercise
+package com.binabola.app.presentation.strenghexercise
 
 //import com.binabola.app.data.remote.model.DetailExercise
 //import com.binabola.app.data.remote.response.AllExerciseRespone

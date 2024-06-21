@@ -1,4 +1,4 @@
-package com.binabola.app.presentation.strengthExercise
+package com.binabola.app.presentation.strenghexercise
 
 import android.os.CountDownTimer
 import android.text.format.DateUtils
@@ -12,8 +12,6 @@ import com.binabola.app.data.repository.AllExerciseRepository
 import com.binabola.app.presentation.InteractiveUiState
 import com.binabola.app.data.Result
 import com.binabola.app.data.model.Exercise
-import com.binabola.app.data.remote.model.AllExerciseRespone
-import com.binabola.app.data.remote.response.GetDetailExercise
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

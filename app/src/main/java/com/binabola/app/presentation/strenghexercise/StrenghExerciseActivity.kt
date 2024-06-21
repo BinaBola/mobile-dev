@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.compose.material3.MaterialTheme
 import androidx.lifecycle.lifecycleScope
 import com.binabola.app.presentation.MainViewModel
-import com.binabola.app.presentation.StrengthExercise.StrengthExercise
 import com.binabola.app.presentation.ViewModelFactory
 import com.binabola.app.presentation.exercise.DetailExerciseActivity
 import dagger.hilt.android.AndroidEntryPoint
