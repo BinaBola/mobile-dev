@@ -1,4 +1,5 @@
 # BinaBola - ENTS-H113
+![BinaBola Cover](https://ik.imagekit.io/RifqiLukmansyah/Layout%208.png?updatedAt=1718953499808)
 ## Table of Contents
 
 1. [Team ENTS-H113 - MD](#Team-ENTS-H113---md)
@@ -26,7 +27,6 @@ this application has the potential to make a real difference in the lives of Ind
 - Mlkit
 - TFLite
 - Retrofit
-- Firebase auth
 - Camera X
 - Room
 - Sqlite
@@ -40,3 +40,12 @@ this application has the potential to make a real difference in the lives of Ind
 ## Video demo
 
 ## Download Our Apps
+
+
+You can download it here:   OR   
+
+If when installed apk show error "App not installed" , make sure that your device does not block installing apk from outside the playtore or the install from uknown source setting must be allowed and make sure when download not corrupted .  
+
+or another possibility is that your android version does not support using this apk 
+
+Min Android version to run this app : 7.0 
