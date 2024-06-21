@@ -33,9 +33,20 @@ this application has the potential to make a real difference in the lives of Ind
 - Coil
 - MVVM Architecture
 
-## Feature
 
 ## Screenshots
+![Onboarding](https://ik.imagekit.io/RifqiLukmansyah/Layout%202.png?updatedAt=1718954762717)
+![Authentication](https://ik.imagekit.io/RifqiLukmansyah/Layout%209.png?updatedAt=1718954804250)
+![Exercise](https://ik.imagekit.io/RifqiLukmansyah/Layout%2010.png?updatedAt=1718954861875)
+![AI Food](https://ik.imagekit.io/RifqiLukmansyah/Layout%2011.png?updatedAt=1718954901278)
+
+
+
+
+
+
+
+
 
 ## Video demo
 
