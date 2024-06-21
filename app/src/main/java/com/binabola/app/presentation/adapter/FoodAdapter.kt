@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.binabola.app.data.remote.response.GetDailyCalorieItem
 import com.binabola.app.databinding.ItemFoodBinding
-import com.binabola.app.databinding.ItemMissionBinding
 
 class FoodAdapter : ListAdapter<GetDailyCalorieItem, FoodAdapter.FoodViewHolder>(FoodDiffCallback()){
 

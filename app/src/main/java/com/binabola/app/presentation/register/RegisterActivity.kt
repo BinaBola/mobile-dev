@@ -1,17 +1,14 @@
 package com.binabola.app.presentation.register
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.window.OnBackInvokedDispatcher
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.viewModels
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import com.binabola.app.R
 import com.binabola.app.databinding.ActivityRegisterBinding
 import com.binabola.app.presentation.AppUtil
-import com.binabola.app.presentation.ViewModelFactory
 import com.binabola.app.presentation.adapter.SectionPagerAdapter
 
 class RegisterActivity : AppCompatActivity() {

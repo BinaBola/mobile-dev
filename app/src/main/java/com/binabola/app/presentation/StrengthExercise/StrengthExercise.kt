@@ -1,5 +1,7 @@
-package com.binabola.app.presentation.StrengthExercise
+package com.binabola.app.presentation.strengthExercise
 
+//import com.binabola.app.data.remote.model.DetailExercise
+//import com.binabola.app.data.remote.response.AllExerciseRespone
 import android.content.Context
 import android.content.res.Configuration
 import android.media.MediaPlayer
@@ -79,12 +81,9 @@ import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
-import coil.request.ImageRequest
 import com.binabola.app.R
 import com.binabola.app.data.Result
 import com.binabola.app.data.model.Exercise
-//import com.binabola.app.data.remote.model.DetailExercise
-//import com.binabola.app.data.remote.response.AllExerciseRespone
 import com.binabola.app.ml.PoseDetectorProcessor
 import com.google.android.gms.tasks.TaskExecutors
 import com.google.common.util.concurrent.ListenableFuture

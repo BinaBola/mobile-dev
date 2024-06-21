@@ -3,17 +3,15 @@ package com.binabola.app.presentation.predictfood
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.binabola.app.data.remote.response.PredictFoodResponse
-import com.binabola.app.data.repository.PredictFoodRepository
 import com.binabola.app.data.Result
 import com.binabola.app.data.remote.response.DefaultResponse
 import com.binabola.app.data.remote.response.PredictionData
+import com.binabola.app.data.repository.PredictFoodRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
-import java.io.File
 import javax.inject.Inject
 
 class PredictFoodViewModel @Inject constructor(private val repository: PredictFoodRepository) : ViewModel() {

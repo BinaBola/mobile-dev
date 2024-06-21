@@ -2,20 +2,17 @@ package com.binabola.app.presentation.home
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat.finishAffinity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.binabola.app.R
 import com.binabola.app.data.Result
-import com.binabola.app.data.remote.response.GetExerciseItem
 import com.binabola.app.databinding.FragmentHomeBinding
 import com.binabola.app.presentation.AppUtil
 import com.binabola.app.presentation.MainViewModel

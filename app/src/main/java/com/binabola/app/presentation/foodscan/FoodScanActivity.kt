@@ -1,19 +1,15 @@
 package com.binabola.app.presentation.foodscan
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.text.toLowerCase
 import androidx.lifecycle.lifecycleScope
 import com.binabola.app.R
 import com.binabola.app.data.Result

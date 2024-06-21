@@ -6,15 +6,10 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.InputType
 import android.view.View
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.binabola.app.R
 import com.binabola.app.data.Result
@@ -23,9 +18,6 @@ import com.binabola.app.databinding.ActivityDetailExerciseBinding
 import com.binabola.app.presentation.AppUtil
 import com.binabola.app.presentation.MainViewModel
 import com.binabola.app.presentation.ViewModelFactory
-import com.binabola.app.presentation.predictfood.PredictFoodActivity
-import com.binabola.app.presentation.predictfood.PredictFoodActivity.Companion
-
 import com.binabola.app.presentation.strenghexercise.StrenghExerciseActivity
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout

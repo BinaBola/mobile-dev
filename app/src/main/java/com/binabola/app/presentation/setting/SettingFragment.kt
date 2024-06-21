@@ -3,23 +3,18 @@ package com.binabola.app.presentation.setting
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import com.binabola.app.R
 import com.binabola.app.databinding.FragmentSettingBinding
 import com.binabola.app.presentation.MainViewModel
 import com.binabola.app.presentation.ViewModelFactory
 import com.binabola.app.presentation.WelcomeActivity
-import com.binabola.app.presentation.home.HomeFragment
-import com.binabola.app.presentation.register.RegisterActivity
 
 
 class SettingFragment : Fragment() {

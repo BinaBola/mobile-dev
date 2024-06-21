@@ -2,7 +2,6 @@ package com.binabola.app.presentation.food
 
 
 import android.app.Activity.RESULT_OK
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,24 +12,17 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.binabola.app.R
 import com.binabola.app.databinding.FragmentFoodBinding
-import com.binabola.app.presentation.adapter.CalendarAdapter
-import com.binabola.app.presentation.register.RegisterActivity
 import com.binabola.app.presentation.MainViewModel
 import com.binabola.app.presentation.ViewModelFactory
+import com.binabola.app.presentation.adapter.CalendarAdapter
 import com.binabola.app.presentation.adapter.FoodAdapter
 import com.binabola.app.presentation.foodscan.FoodScanActivity
-import com.binabola.app.presentation.foodscan.FoodScanActivity.Companion.EXTRA_FOOD_VALUE
-import com.binabola.app.presentation.foodscan.FoodScanActivity.Companion.RESULT_CODE_SCAN
-import com.binabola.app.presentation.setting.SettingFragment
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar

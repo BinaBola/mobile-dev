@@ -1,4 +1,4 @@
-package com.binabola.app.presentation.StrengthExercise
+package com.binabola.app.presentation.strengthExercise
 
 import android.os.CountDownTimer
 import android.text.format.DateUtils

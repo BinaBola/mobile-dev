@@ -1,15 +1,14 @@
 package com.binabola.app.presentation.adapter
 
-import java.util.Calendar
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.binabola.app.R
 import com.binabola.app.databinding.ItemCalendarBinding
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Locale
 
 class CalendarAdapter(private val listener: (Calendar) -> Unit) :

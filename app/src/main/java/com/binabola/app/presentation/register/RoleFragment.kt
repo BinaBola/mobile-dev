@@ -3,16 +3,13 @@ package com.binabola.app.presentation.register
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import com.binabola.app.R
 import com.binabola.app.databinding.FragmentRoleBinding
 import com.binabola.app.presentation.AppUtil
-import com.binabola.app.presentation.ViewModelFactory
 
 class RoleFragment : Fragment() {
     private var _binding: FragmentRoleBinding? = null

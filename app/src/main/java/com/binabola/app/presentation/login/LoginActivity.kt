@@ -1,19 +1,16 @@
 package com.binabola.app.presentation.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
-import com.binabola.app.R
+import androidx.appcompat.app.AppCompatActivity
 import com.binabola.app.data.Result
 import com.binabola.app.databinding.ActivityLoginBinding
 import com.binabola.app.presentation.AppUtil
 import com.binabola.app.presentation.MainActivity
 import com.binabola.app.presentation.ViewModelFactory
 import com.binabola.app.presentation.register.RegisterActivity
-import com.binabola.app.presentation.register.RegisterViewModel
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding

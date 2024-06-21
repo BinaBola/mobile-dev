@@ -2,12 +2,7 @@ package com.binabola.app.presentation.onboarding
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.binabola.app.R
-import com.binabola.app.databinding.ActivityOnboarding1Binding
 import com.binabola.app.databinding.ActivityOnboarding2Binding
 import com.binabola.app.presentation.login.LoginActivity
 

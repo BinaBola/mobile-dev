@@ -1,16 +1,13 @@
 package com.binabola.app.presentation
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.activity.enableEdgeToEdge
-import com.binabola.app.R
+import androidx.appcompat.app.AppCompatActivity
 import com.binabola.app.databinding.ActivityWelcomeBinding
-import com.binabola.app.presentation.login.LoginActivity
 import com.binabola.app.presentation.onboarding.Onboarding1Activity
-import com.binabola.app.presentation.register.RegisterActivity
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWelcomeBinding

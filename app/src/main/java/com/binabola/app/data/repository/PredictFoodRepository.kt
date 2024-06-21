@@ -1,24 +1,21 @@
 package com.binabola.app.data.repository
 
 import android.util.Log
-import com.binabola.app.data.remote.response.PredictFoodResponse
-import com.binabola.app.data.remote.retrofit.MlApiService
 import com.binabola.app.data.Result
 import com.binabola.app.data.pref.UserPreference
 import com.binabola.app.data.remote.response.DefaultResponse
+import com.binabola.app.data.remote.response.PredictFoodResponse
 import com.binabola.app.data.remote.response.PredictionData
 import com.binabola.app.data.remote.retrofit.ApiService
+import com.binabola.app.data.remote.retrofit.MlApiService
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.HttpException
-import java.io.File
 import javax.inject.Inject
 
 class PredictFoodRepository @Inject constructor(private val userPreference: UserPreference, private val mlApiService: MlApiService, private val apiService: ApiService) {

@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.binabola.app.data.remote.response.GetExerciseItem
 import com.binabola.app.databinding.ItemMissionBinding
 import com.bumptech.glide.Glide
-import kotlin.time.Duration
 
 class ExerciseAdapter(private val listener: (GetExerciseItem) -> Unit) : ListAdapter<GetExerciseItem, ExerciseAdapter.ExerciseViewHolder>(ExerciseDiffCallback()) {
     inner class ExerciseViewHolder(private val binding: ItemMissionBinding) : RecyclerView.ViewHolder(binding.root) {

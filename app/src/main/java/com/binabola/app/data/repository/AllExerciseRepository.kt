@@ -6,14 +6,10 @@ import com.binabola.app.data.local.FakeData
 import com.binabola.app.data.model.Exercise
 import com.binabola.app.data.pref.UserPreference
 import com.binabola.app.data.remote.model.AllExerciseRespone
-import com.binabola.app.data.remote.response.GetDetailExercise
 import com.binabola.app.data.remote.retrofit.ApiService
 import com.google.gson.Gson
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import javax.inject.Inject
 
