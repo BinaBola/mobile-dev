@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
-            android:text="Scan Makanan"
+            android:text="@string/scan_makanan"
             android:textSize="16sp" />
 
         <ImageView
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
-                android:text="Kalori: 0.0 kcal" />
+                android:text="@string/kalori_0_0_kcal" />
         <TextView
             android:id="@+id/tv_food"
             android:textColor="@color/black"
@@ -82,13 +82,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
-            android:text="Makanan"
+            android:text="@string/makanan"
             android:textSize="16sp" />
         <EditText
             android:id="@+id/edtfoodname"
             android:layout_width="match_parent"
             android:background="@drawable/bg_bordered_edit_text"
-            android:hint="Nama makanan"
+            android:hint="@string/nama_makanan"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp"
@@ -103,14 +103,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="@dimen/margin_3"
-            android:text="Jumlah"
+            android:text="@string/jumlah"
             android:textSize="16sp" />
 
         <EditText
             android:id="@+id/edtfoodjumlah"
             android:layout_width="match_parent"
             android:background="@drawable/bg_bordered_edit_text"
-            android:hint="Jumlah asupan (pcs)"
+            android:hint="@string/jumlah_asupan_pcs"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp"
@@ -126,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="@dimen/margin_3"
-                android:text="Kategori"
+                android:text="@string/kategori"
                 android:textSize="16sp" />
 
             <FrameLayout
@@ -167,7 +167,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="@dimen/margin_1"
                 android:paddingVertical="16dp"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:layout_height="60dp"
                 android:layout_width="match_parent"
                 android:textColor="@color/white"

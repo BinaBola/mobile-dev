@@ -99,7 +99,7 @@
                 android:id="@+id/manyfood"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kalori Makanan yang Masuk Hari Ini: 0 kcal"
+                android:text="@string/kalori_makanan_yang_masuk_hari_ini_0_kcal"
                 app:layout_constraintTop_toBottomOf="@id/rv_calendar"
                 android:layout_margin="@dimen/margin_3"
                 app:layout_constraintStart_toStartOf="parent"/>
@@ -139,7 +139,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tidak ada data"/>
+                    android:text="@string/tidak_ada_data"/>
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
@@ -151,7 +151,7 @@
                 app:iconTint="@color/white"
                 android:layout_margin="16dp"
                 android:paddingVertical="16dp"
-                android:text="Add Food"
+                android:text="@string/add_food"
                 android:layout_height="60dp"
                 android:layout_width="wrap_content"
                 android:textColor="@color/white"

@@ -31,7 +31,7 @@
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Mission Title"
+                android:text="@string/mission_title"
                 android:textSize="@dimen/font_size_large" />
 
             <TextView
@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minLines="2"
-                android:text="Supporting or descriptive text for the card goes lorem ipsum dolor sit amet" />
+                android:text="@string/supporting_or_descriptive_text_for_the_card_goes_lorem_ipsum_dolor_sit_amet" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
                     android:id="@+id/tv_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5 mnt"/>
+                    android:text="@string/_5_mnt"/>
 
                 <View
                     android:layout_width="0dp"
@@ -74,7 +74,7 @@
                     android:id="@+id/tv_cal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 kcal"/>
+                    android:text="@string/_0_cal"/>
             </LinearLayout>
         </LinearLayout>
 

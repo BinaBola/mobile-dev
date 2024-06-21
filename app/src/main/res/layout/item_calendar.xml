@@ -12,14 +12,14 @@
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="20"
+        android:text="@string/_20"
         android:textSize="@dimen/font_size_large"
         android:textStyle="bold"/>
     <TextView
         android:id="@+id/tvDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Senin"
+        android:text="@string/senin"
         android:textSize="@dimen/font_size_small" />
 
 </LinearLayout>

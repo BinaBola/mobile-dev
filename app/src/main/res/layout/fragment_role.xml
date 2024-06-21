@@ -11,13 +11,14 @@
         android:id="@+id/roleGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
         
         <RadioButton
             android:id="@+id/radioClub"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Klub"
+            android:text="@string/klub"
             android:padding="@dimen/margin_2"
             android:background="@drawable/border_calories"
             android:textSize="@dimen/font_size_large"
@@ -28,7 +29,7 @@
             android:id="@+id/radioCoach"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pelatih"
+            android:text="@string/pelatih"
             android:padding="@dimen/margin_2"
             android:layout_marginTop="@dimen/margin_3"
             android:background="@drawable/border_calories"
@@ -40,7 +41,7 @@
             android:id="@+id/radioPlayer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pemain"
+            android:text="@string/pemain"
             android:padding="@dimen/margin_2"
             android:layout_marginTop="@dimen/margin_3"
             android:background="@drawable/border_calories"

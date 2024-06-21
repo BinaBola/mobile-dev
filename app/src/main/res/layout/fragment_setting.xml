@@ -18,7 +18,7 @@
         android:id="@+id/tv_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="user_name"
+        android:text="@string/user_name"
         android:textSize="@dimen/font_size_large"
         android:textStyle="bold"
         android:gravity="center"

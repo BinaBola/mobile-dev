@@ -53,7 +53,7 @@
                    android:id="@+id/tvOverview"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="Deskripsi"
+                   android:text="@string/deskripsi"
                    android:textSize="@dimen/font_size_large"
                    android:textStyle="bold"
                    android:layout_margin="@dimen/margin_3"
@@ -65,7 +65,7 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:layout_margin="@dimen/margin_3"
-                   android:text="Lorem ipsum dolor sit ametorem ipsum dolor sit ametorem ipsum dolor sit ametorem ipsum dolor sit amet"
+                   android:text="@string/lorem_ipsum_dolor_sit_ametorem_ipsum_dolor_sit_ametorem_ipsum_dolor_sit_ametorem_ipsum_dolor_sit_amet"
                    app:layout_constraintTop_toBottomOf="@id/tvOverview"/>
 
                <EditText

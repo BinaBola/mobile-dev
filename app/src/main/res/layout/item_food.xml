@@ -18,12 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="food_name"/>
+            android:text="@string/food_name"/>
         <TextView
             android:id="@+id/calorie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="food_cal"/>
+            android:text="@string/food_cal"/>
     </LinearLayout>
 
     <LinearLayout
@@ -36,7 +36,7 @@
             android:id="@+id/category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pagi"/>
+            android:text="@string/pagi"/>
     </LinearLayout>
 
 </LinearLayout>

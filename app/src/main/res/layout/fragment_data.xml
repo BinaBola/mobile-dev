@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tanggal Lahir"/>
+        android:text="@string/tanggal_lahir" />
 
     <LinearLayout
         android:id="@+id/choose_date"
@@ -21,25 +22,26 @@
         android:gravity="center"
         android:background="@drawable/border_calories"
         android:padding="@dimen/margin_3">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_calendar_month_24"
-            android:tint="@color/grey_400"
-            android:layout_marginEnd="@dimen/margin_3"/>
+            android:layout_marginEnd="@dimen/margin_3"
+            app:tint="@color/grey_400" />
 
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Pilih tanggal"/>
+            android:text="@string/pilih_tanggal"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Jenis Kelamin"
+        android:text="@string/jenis_kelamin"
         android:layout_marginTop="@dimen/margin_3"/>
     <RadioGroup
         android:id="@+id/radioGender"
@@ -52,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/border_calories"
-            android:text="Laki laki"
+            android:text="@string/laki_laki"
             android:layout_marginEnd="@dimen/margin_4"/>
         <RadioButton
             android:id="@+id/rb_female"
@@ -60,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/border_calories"
-            android:text="Perempuan"/>
+            android:text="@string/perempuan"/>
     </RadioGroup>
 
     <LinearLayout
@@ -77,13 +79,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tinggi"/>
+                android:text="@string/tinggi"/>
             <EditText
                 android:id="@+id/et_tinggi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="12dp"
-                android:hint="Tinggi (cm)"
+                android:hint="@string/tinggi_cm"
                 android:textSize="14sp"
                 android:inputType="numberDecimal"
                 android:maxLength="3"
@@ -97,13 +99,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Berat"/>
+                android:text="@string/berat"/>
             <EditText
                 android:id="@+id/et_berat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="12dp"
-                android:hint="Berat (kg)"
+                android:hint="@string/berat_kg"
                 android:textSize="14sp"
                 android:inputType="numberDecimal"
                 android:maxLength="3"
